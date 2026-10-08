@@ -1,0 +1,22 @@
+DEMO MEDICAL REPORT — SYNTHETIC DATA ONLY
+Hospital: MediKiosk Demo Hospital
+Patient: Demo Patient
+Doctor: Demo Clinician
+Date: 2026-09-10
+
+Chief complaint: Fever and body pain for 4 days.
+Clinical diagnosis: Acute febrile illness — evaluation required.
+
+Medications:
+Tablet Paracetamol 500 mg — as previously prescribed.
+Syrup ORS — oral rehydration advice.
+
+Investigations:
+Hemoglobin: 12.8 g/dL
+Glucose: 108 mg/dL
+Creatinine: 0.9 mg/dL
+Blood pressure: 128/78 mmHg
+
+Impression: Continue clinical assessment and correlate symptoms with examination and investigations.
+
+NOTE: This is synthetic demonstration content. It is not a real patient report.

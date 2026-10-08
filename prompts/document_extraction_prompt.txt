@@ -1,0 +1,1 @@
+Extract diagnoses, medicines, investigations, dates and procedures from the document. Preserve uncertainty and require verification when OCR confidence is low.

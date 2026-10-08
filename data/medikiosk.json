@@ -1,0 +1,2474 @@
+{
+  "hospital": {
+    "id": "H001",
+    "name": "MediKiosk Demo Hospital"
+  },
+  "admin": {
+    "email": "admin@hospital.local",
+    "password_hash": "a52b68446e06a0ca34cda0d8b33ee0c8d7928e1041710ba6c35c446281028bab"
+  },
+  "departments": [
+    {
+      "id": "D1",
+      "name": "General Medicine",
+      "email": "generalmedicine@hospital.local",
+      "password_hash": "f077596aa64574bd7bf2fb5aecb9543ce49b61eee475fa6364b366d05f8e52d7",
+      "active": true,
+      "shift": "09:00 AM - 01:00 PM"
+    },
+    {
+      "id": "D2",
+      "name": "Cardiology",
+      "email": "cardiology@hospital.local",
+      "password_hash": "f077596aa64574bd7bf2fb5aecb9543ce49b61eee475fa6364b366d05f8e52d7",
+      "active": true,
+      "shift": "09:00 AM - 01:00 PM"
+    },
+    {
+      "id": "D3",
+      "name": "Pulmonology",
+      "email": "pulmonology@hospital.local",
+      "password_hash": "f077596aa64574bd7bf2fb5aecb9543ce49b61eee475fa6364b366d05f8e52d7",
+      "active": true,
+      "shift": "10:00 AM - 02:00 PM"
+    },
+    {
+      "id": "D4",
+      "name": "Orthopaedics",
+      "email": "orthopaedics@hospital.local",
+      "password_hash": "f077596aa64574bd7bf2fb5aecb9543ce49b61eee475fa6364b366d05f8e52d7",
+      "active": true,
+      "shift": "09:00 AM - 01:00 PM"
+    },
+    {
+      "id": "D5",
+      "name": "Dermatology",
+      "email": "dermatology@hospital.local",
+      "password_hash": "f077596aa64574bd7bf2fb5aecb9543ce49b61eee475fa6364b366d05f8e52d7",
+      "active": true,
+      "shift": "11:00 AM - 03:00 PM"
+    },
+    {
+      "id": "D6",
+      "name": "Ayurveda",
+      "email": "ayurveda@hospital.local",
+      "password_hash": "f077596aa64574bd7bf2fb5aecb9543ce49b61eee475fa6364b366d05f8e52d7",
+      "active": true,
+      "shift": "09:00 AM - 01:00 PM"
+    }
+  ],
+  "staff": {
+    "name": "Demo Triage Staff",
+    "email": "staff@hospital.local",
+    "password_hash": "c7a2ec9b6f795021878bbf73963eb2caeaf1b357043207b8056fbc58ebc3e9c2",
+    "active": true
+  },
+  "patients": {
+    "PT-72D52B31": {
+      "id": "PT-72D52B31",
+      "name": "abinesh",
+      "age": 20,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 02:19:32"
+    },
+    "PT-FCE79010": {
+      "id": "PT-FCE79010",
+      "name": "abinesh",
+      "age": 20,
+      "gender": "Male",
+      "phone": "9952805507",
+      "address": "",
+      "created_at": "2026-09-13 12:25:47"
+    },
+    "PT-084AA7B6": {
+      "id": "PT-084AA7B6",
+      "name": "abinesh",
+      "age": 20,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 12:27:19"
+    },
+    "PT-B61069D1": {
+      "id": "PT-B61069D1",
+      "name": "Abinesh Abi007",
+      "age": 19,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 13:52:44"
+    },
+    "PT-B725F0B3": {
+      "id": "PT-B725F0B3",
+      "name": "Abinesh Abi007",
+      "age": 20,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 14:07:26"
+    },
+    "PT-781DC0B2": {
+      "id": "PT-781DC0B2",
+      "name": "abinesh",
+      "age": 20,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 14:09:10"
+    },
+    "PT-73C25726": {
+      "id": "PT-73C25726",
+      "name": "abinesh",
+      "age": 30,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 14:38:41"
+    },
+    "PT-3274D617": {
+      "id": "PT-3274D617",
+      "name": "abinesh",
+      "age": 30,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 14:39:45"
+    },
+    "PT-FAE6E266": {
+      "id": "PT-FAE6E266",
+      "name": "abinesh",
+      "age": 30,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 14:51:54"
+    },
+    "PT-AD91639D": {
+      "id": "PT-AD91639D",
+      "name": "abinesh",
+      "age": 20,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 14:52:21"
+    },
+    "PT-3289AEA4": {
+      "id": "PT-3289AEA4",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 14:58:50"
+    },
+    "PT-1F0AB3E3": {
+      "id": "PT-1F0AB3E3",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 15:48:26"
+    },
+    "PT-2235C671": {
+      "id": "PT-2235C671",
+      "name": "abinesh",
+      "age": 20,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 15:53:45"
+    },
+    "PT-591D3D91": {
+      "id": "PT-591D3D91",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 15:58:28"
+    },
+    "PT-8FDE3F74": {
+      "id": "PT-8FDE3F74",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 15:58:51"
+    },
+    "PT-D25FA1EC": {
+      "id": "PT-D25FA1EC",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 16:00:06"
+    },
+    "PT-3030754F": {
+      "id": "PT-3030754F",
+      "name": "ab",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 16:00:24"
+    },
+    "PT-A48EE123": {
+      "id": "PT-A48EE123",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 16:23:59"
+    },
+    "PT-DAC5C286": {
+      "id": "PT-DAC5C286",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 16:24:58"
+    },
+    "PT-59EEE913": {
+      "id": "PT-59EEE913",
+      "name": "Abinesh Abi007",
+      "age": 18,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 16:27:15"
+    },
+    "PT-5E3894F9": {
+      "id": "PT-5E3894F9",
+      "name": "Test",
+      "age": 20,
+      "gender": "Other",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 12:33:28"
+    },
+    "PT-FFD2B63E": {
+      "id": "PT-FFD2B63E",
+      "name": "Test",
+      "age": 20,
+      "gender": "Other",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 12:33:28"
+    },
+    "PT-49492E51": {
+      "id": "PT-49492E51",
+      "name": "Abinesh Abi007",
+      "age": 25,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 18:35:37"
+    },
+    "PT-F7BC5585": {
+      "id": "PT-F7BC5585",
+      "name": "abi",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 18:53:51"
+    },
+    "PT-91756C43": {
+      "id": "PT-91756C43",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 18:54:43"
+    },
+    "PT-DED72E35": {
+      "id": "PT-DED72E35",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 19:34:21"
+    },
+    "PT-985B89D6": {
+      "id": "PT-985B89D6",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 19:34:55"
+    },
+    "PT-8C9235B3": {
+      "id": "PT-8C9235B3",
+      "name": "Abinesh Abi007",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 19:35:31"
+    },
+    "PT-6FED0FFC": {
+      "id": "PT-6FED0FFC",
+      "name": "abi",
+      "age": 24,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 19:36:00"
+    },
+    "PT-1DCC4835": {
+      "id": "PT-1DCC4835",
+      "name": "abinesh",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 19:37:55"
+    },
+    "PT-E81E5EF2": {
+      "id": "PT-E81E5EF2",
+      "name": "abiesh",
+      "age": 24,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 19:41:26"
+    },
+    "PT-5159F8D2": {
+      "id": "PT-5159F8D2",
+      "name": "abi",
+      "age": 23,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-13 20:13:15"
+    },
+    "PT-2FC97958": {
+      "id": "PT-2FC97958",
+      "name": "abinesh",
+      "age": 20,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 16:17:00"
+    },
+    "PT-5D4E482E": {
+      "id": "PT-5D4E482E",
+      "name": "ab",
+      "age": 11,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 16:20:12"
+    },
+    "PT-3E14C683": {
+      "id": "PT-3E14C683",
+      "name": "qqq",
+      "age": 11,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 16:21:03"
+    },
+    "PT-B94B2480": {
+      "id": "PT-B94B2480",
+      "name": "aaaa",
+      "age": 12,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 16:21:51"
+    },
+    "PT-744E0157": {
+      "id": "PT-744E0157",
+      "name": "gjhbn",
+      "age": 45,
+      "gender": "Female",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 16:38:47"
+    },
+    "PT-B0D06829": {
+      "id": "PT-B0D06829",
+      "name": "sdfdfd",
+      "age": 23,
+      "gender": "Female",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 16:47:16"
+    },
+    "PT-1BADA335": {
+      "id": "PT-1BADA335",
+      "name": "abinesh",
+      "age": 29,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 17:51:08"
+    },
+    "PT-FAADF6A9": {
+      "id": "PT-FAADF6A9",
+      "name": "Abinesh Abi007",
+      "age": 18,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 21:54:33"
+    },
+    "PT-5D05E1B4": {
+      "id": "PT-5D05E1B4",
+      "name": "dddd",
+      "age": 18,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-14 21:55:06"
+    },
+    "PT-970F9E26": {
+      "id": "PT-970F9E26",
+      "name": "giri",
+      "age": 20,
+      "gender": "Female",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-17 10:27:29"
+    },
+    "PT-ABAA1203": {
+      "id": "PT-ABAA1203",
+      "name": "giri",
+      "age": 20,
+      "gender": "Male",
+      "phone": "9952805507",
+      "address": "",
+      "created_at": "2026-09-17 10:31:43"
+    },
+    "PT-31613974": {
+      "id": "PT-31613974",
+      "name": "Nithish",
+      "age": 12,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-17 10:51:30"
+    },
+    "PT-9A03A1B9": {
+      "id": "PT-9A03A1B9",
+      "name": "abinesh",
+      "age": 12,
+      "gender": "Male",
+      "phone": "",
+      "address": "",
+      "created_at": "2026-09-18 22:42:32"
+    }
+  },
+  "cases": {
+    "CASE-4A9DAF2A": {
+      "id": "CASE-4A9DAF2A",
+      "patient_id": "PT-5E3894F9",
+      "mode": "NORMAL",
+      "language": "English",
+      "status": "WAITING",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "What is your main health problem today?",
+          "answer": "Fever",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_pattern",
+          "question": "Does the fever stay constant or come and go?",
+          "answer": "Constant",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_temperature",
+          "question": "Have you measured your temperature? If yes, what was the highest reading?",
+          "answer": "Measured",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_chills",
+          "question": "Do you have chills or shivering with the fever?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_bodypain",
+          "question": "Do you have body pain, muscle aches, or unusual tiredness?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_headache",
+          "question": "Do you have headache along with the fever?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_cough",
+          "question": "Do you also have cough, sore throat, or breathing difficulty?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_duration",
+          "question": "How long have you had the cough or breathing problem?",
+          "answer": "Less than a week",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_type",
+          "question": "Is the cough dry or do you bring up phlegm?",
+          "answer": "Dry",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_phlegm",
+          "question": "If there is phlegm, what is its colour?",
+          "answer": "White/clear",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_breathing",
+          "question": "When do you feel breathless?",
+          "answer": "At rest",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_wheeze",
+          "question": "Do you have wheezing or chest tightness?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_fever",
+          "question": "Do you have fever, chills, or body pain with the respiratory problem?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_night",
+          "question": "Is the cough or breathing problem worse at night or while lying down?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_exposure",
+          "question": "Have you had recent smoke, dust, chemical, pollen, or infection exposure?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_history",
+          "question": "Do you have asthma, allergy, tuberculosis, or another lung condition?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_activity",
+          "question": "Has the breathing problem reduced your ability to walk or do normal activities?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_gi",
+          "question": "Do you have vomiting, loose stools, or abdominal discomfort?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_location",
+          "question": "Where exactly is the abdominal pain or discomfort?",
+          "answer": "Upper",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_character",
+          "question": "What does the pain feel like?",
+          "answer": "Cramping",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_food",
+          "question": "Does the pain change after eating or when your stomach is empty?",
+          "answer": "After eating",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_bowel",
+          "question": "Have your bowel movements changed recently?",
+          "answer": "Loose stools",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_vomiting",
+          "question": "Do you have nausea or vomiting?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_bloating",
+          "question": "Do you have bloating, excess gas, or a feeling of fullness?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_blood",
+          "question": "Have you noticed blood in vomit or stool, or black stool?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_urinary",
+          "question": "Do you also have urinary burning, frequency, or side/back pain?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_fever",
+          "question": "Do you have fever or chills along with the abdominal problem?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_previous",
+          "question": "Have you had a similar abdominal problem before or any previous abdominal surgery?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_diet",
+          "question": "Did any recent food, meal timing, or eating habit seem to trigger the problem?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "vomit_frequency",
+          "question": "How often have you been vomiting?",
+          "answer": "Once",
+          "time": "2026-09-13 12:33:28"
+        }
+      ],
+      "summary": {
+        "chief_complaint": "Fever",
+        "clinical_text": "Chief complaint: Fever\nDetected symptom areas: fever, diarrhea\nSymptom-specific and adaptive answers:\n- fever_pattern: Constant\n- fever_temperature: Measured\n- fever_chills: Yes\n- fever_bodypain: Yes\n- fever_headache: Yes\n- fever_cough: Yes\n- resp_duration: Less than a week\n- resp_type: Dry\n- resp_phlegm: White/clear\n- resp_breathing: At rest\n- resp_wheeze: Yes\n- resp_fever: Yes\n- resp_night: Yes\n- resp_exposure: Yes\n- resp_history: Yes\n- resp_activity: Yes\n- fever_gi: Yes\n- abd_location: Upper\n- abd_character: Cramping\n- abd_food: After eating\n- abd_bowel: Loose stools\n- abd_vomiting: Yes\n- abd_bloating: Yes\n- abd_blood: Yes\n- abd_urinary: Yes\n- abd_fever: Yes\n- abd_previous: Yes\n- abd_diet: Yes\n- vomit_frequency: Once\nAI-assisted draft; clinician verification required.",
+        "answered_questions": 30,
+        "detected_symptoms": [
+          "fever",
+          "diarrhea"
+        ],
+        "safety_screen": "NORMAL",
+        "adaptive_interview": true,
+        "note": "AI-assisted draft; clinician verification required."
+      },
+      "documents": [],
+      "department_id": "D1",
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "fever",
+        "diarrhea"
+      ],
+      "created_at": "2026-09-13 12:33:28",
+      "updated_at": "2026-09-13 12:33:28"
+    },
+    "CASE-F733925A": {
+      "id": "CASE-F733925A",
+      "patient_id": "PT-FFD2B63E",
+      "mode": "AYUSH",
+      "language": "English",
+      "status": "WAITING",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "What is your main health problem today?",
+          "answer": "Fever",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_pattern",
+          "question": "Does the fever stay constant or come and go?",
+          "answer": "Constant",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_temperature",
+          "question": "Have you measured your temperature? If yes, what was the highest reading?",
+          "answer": "Measured",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_chills",
+          "question": "Do you have chills or shivering with the fever?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_bodypain",
+          "question": "Do you have body pain, muscle aches, or unusual tiredness?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_headache",
+          "question": "Do you have headache along with the fever?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_cough",
+          "question": "Do you also have cough, sore throat, or breathing difficulty?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_duration",
+          "question": "How long have you had the cough or breathing problem?",
+          "answer": "Less than a week",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_type",
+          "question": "Is the cough dry or do you bring up phlegm?",
+          "answer": "Dry",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_phlegm",
+          "question": "If there is phlegm, what is its colour?",
+          "answer": "White/clear",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_breathing",
+          "question": "When do you feel breathless?",
+          "answer": "At rest",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_wheeze",
+          "question": "Do you have wheezing or chest tightness?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_fever",
+          "question": "Do you have fever, chills, or body pain with the respiratory problem?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_night",
+          "question": "Is the cough or breathing problem worse at night or while lying down?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_exposure",
+          "question": "Have you had recent smoke, dust, chemical, pollen, or infection exposure?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_history",
+          "question": "Do you have asthma, allergy, tuberculosis, or another lung condition?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "resp_activity",
+          "question": "Has the breathing problem reduced your ability to walk or do normal activities?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "fever_gi",
+          "question": "Do you have vomiting, loose stools, or abdominal discomfort?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_location",
+          "question": "Where exactly is the abdominal pain or discomfort?",
+          "answer": "Upper",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_character",
+          "question": "What does the pain feel like?",
+          "answer": "Cramping",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_food",
+          "question": "Does the pain change after eating or when your stomach is empty?",
+          "answer": "After eating",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_bowel",
+          "question": "Have your bowel movements changed recently?",
+          "answer": "Loose stools",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_vomiting",
+          "question": "Do you have nausea or vomiting?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_bloating",
+          "question": "Do you have bloating, excess gas, or a feeling of fullness?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_blood",
+          "question": "Have you noticed blood in vomit or stool, or black stool?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_urinary",
+          "question": "Do you also have urinary burning, frequency, or side/back pain?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_fever",
+          "question": "Do you have fever or chills along with the abdominal problem?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_previous",
+          "question": "Have you had a similar abdominal problem before or any previous abdominal surgery?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "abd_diet",
+          "question": "Did any recent food, meal timing, or eating habit seem to trigger the problem?",
+          "answer": "Yes",
+          "time": "2026-09-13 12:33:28"
+        },
+        {
+          "question_key": "vomit_frequency",
+          "question": "How often have you been vomiting?",
+          "answer": "Once",
+          "time": "2026-09-13 12:33:28"
+        }
+      ],
+      "summary": {
+        "chief_complaint": "Fever",
+        "clinical_text": "Chief complaint: Fever\nDetected symptom areas: fever, diarrhea\nSymptom-specific and adaptive answers:\n- fever_pattern: Constant\n- fever_temperature: Measured\n- fever_chills: Yes\n- fever_bodypain: Yes\n- fever_headache: Yes\n- fever_cough: Yes\n- resp_duration: Less than a week\n- resp_type: Dry\n- resp_phlegm: White/clear\n- resp_breathing: At rest\n- resp_wheeze: Yes\n- resp_fever: Yes\n- resp_night: Yes\n- resp_exposure: Yes\n- resp_history: Yes\n- resp_activity: Yes\n- fever_gi: Yes\n- abd_location: Upper\n- abd_character: Cramping\n- abd_food: After eating\n- abd_bowel: Loose stools\n- abd_vomiting: Yes\n- abd_bloating: Yes\n- abd_blood: Yes\n- abd_urinary: Yes\n- abd_fever: Yes\n- abd_previous: Yes\n- abd_diet: Yes\n- vomit_frequency: Once\nAI-assisted draft; clinician verification required.",
+        "answered_questions": 30,
+        "detected_symptoms": [
+          "fever",
+          "diarrhea"
+        ],
+        "safety_screen": "NORMAL",
+        "adaptive_interview": true,
+        "note": "AI-assisted draft; clinician verification required."
+      },
+      "documents": [],
+      "department_id": "D6",
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "fever",
+        "diarrhea"
+      ],
+      "created_at": "2026-09-13 12:33:28",
+      "updated_at": "2026-09-13 12:33:28"
+    },
+    "CASE-457C8783": {
+      "id": "CASE-457C8783",
+      "patient_id": "PT-49492E51",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "HIGH",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "காய்ச்சல்",
+          "time": "2026-09-13 18:45:54"
+        },
+        {
+          "question_key": "fever_pattern",
+          "question": "காய்ச்சல் தொடர்ந்து இருக்கிறதா அல்லது வந்து போகிறதா?",
+          "answer": "வந்து போகிறது",
+          "time": "2026-09-13 18:46:03"
+        },
+        {
+          "question_key": "fever_temperature",
+          "question": "உங்கள் உடல் வெப்பநிலையை அளந்தீர்களா? அளந்திருந்தால் அதிகபட்சமாக எவ்வளவு இருந்தது?",
+          "answer": "அளந்தேன்",
+          "time": "2026-09-13 18:46:15"
+        },
+        {
+          "question_key": "fever_chills",
+          "question": "காய்ச்சலுடன் குளிர் நடுக்கம் இருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 18:46:22"
+        },
+        {
+          "question_key": "fever_bodypain",
+          "question": "உடல் வலி, தசை வலி அல்லது வழக்கத்திற்கு மாறான சோர்வு இருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 18:46:29"
+        },
+        {
+          "question_key": "fever_headache",
+          "question": "காய்ச்சலுடன் தலைவலி இருக்கிறதா?",
+          "answer": "தெரியவில்லை",
+          "time": "2026-09-13 18:46:33"
+        },
+        {
+          "question_key": "fever_cough",
+          "question": "இதனுடன் இருமல், தொண்டை வலி அல்லது மூச்சுத்திணறல் இருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 18:46:36"
+        },
+        {
+          "question_key": "resp_duration",
+          "question": "இருமல் அல்லது மூச்சுப் பிரச்சனை எத்தனை நாட்களாக உள்ளது?",
+          "answer": "ஒரு வாரத்திற்கும் குறைவு",
+          "time": "2026-09-13 18:46:44"
+        },
+        {
+          "question_key": "resp_type",
+          "question": "இருமல் உலர்ந்ததா அல்லது சளி வெளியேறுகிறதா?",
+          "answer": "உலர்",
+          "time": "2026-09-13 18:46:49"
+        },
+        {
+          "question_key": "resp_phlegm",
+          "question": "சளி இருந்தால் அதன் நிறம் எப்படி உள்ளது?",
+          "answer": "Blood-stained",
+          "time": "2026-09-13 18:46:53"
+        },
+        {
+          "question_key": "resp_breathing",
+          "question": "எப்போது மூச்சுத்திணறல் ஏற்படுகிறது?",
+          "answer": "இரண்டும்",
+          "time": "2026-09-13 18:46:58"
+        },
+        {
+          "question_key": "resp_wheeze",
+          "question": "மூச்சில் சத்தம் அல்லது மார்பு இறுக்கம் உள்ளதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 18:47:03"
+        },
+        {
+          "question_key": "resp_fever",
+          "question": "மூச்சுப் பிரச்சனையுடன் காய்ச்சல், குளிர் நடுக்கம் அல்லது உடல் வலி உள்ளதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 18:47:06"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "fever"
+      ],
+      "created_at": "2026-09-13 18:35:39",
+      "updated_at": "2026-09-13 18:47:06",
+      "triage_alert": {
+        "created_at": "2026-09-13 18:47:06",
+        "status": "OPEN",
+        "message": "Potential urgent symptom detected; staff/triage attention required."
+      }
+    },
+    "CASE-D797498A": {
+      "id": "CASE-D797498A",
+      "patient_id": "PT-F7BC5585",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [],
+      "created_at": "2026-09-13 18:53:54",
+      "updated_at": "2026-09-13 18:53:54"
+    },
+    "CASE-5B7A69B3": {
+      "id": "CASE-5B7A69B3",
+      "patient_id": "PT-91756C43",
+      "mode": "NORMAL",
+      "language": "English",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [],
+      "created_at": "2026-09-13 18:54:45",
+      "updated_at": "2026-09-13 18:54:45"
+    },
+    "CASE-6A1FF01C": {
+      "id": "CASE-6A1FF01C",
+      "patient_id": "PT-DED72E35",
+      "mode": "AYUSH",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "சிறுநீர் பிரச்சனை",
+          "time": "2026-09-13 19:34:36"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "urinary"
+      ],
+      "created_at": "2026-09-13 19:34:24",
+      "updated_at": "2026-09-13 19:34:36"
+    },
+    "CASE-E53F120B": {
+      "id": "CASE-E53F120B",
+      "patient_id": "PT-985B89D6",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "சிறுநீர் பிரச்சனை",
+          "time": "2026-09-13 19:35:01"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "urinary"
+      ],
+      "created_at": "2026-09-13 19:34:56",
+      "updated_at": "2026-09-13 19:35:01"
+    },
+    "CASE-2727397E": {
+      "id": "CASE-2727397E",
+      "patient_id": "PT-8C9235B3",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "சிறுநீர் பிரச்சனை",
+          "time": "2026-09-13 19:35:42"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "urinary"
+      ],
+      "created_at": "2026-09-13 19:35:33",
+      "updated_at": "2026-09-13 19:35:42"
+    },
+    "CASE-CE3F1F98": {
+      "id": "CASE-CE3F1F98",
+      "patient_id": "PT-6FED0FFC",
+      "mode": "AYUSH",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "தலைவலி",
+          "time": "2026-09-13 19:36:16"
+        },
+        {
+          "question_key": "ayush_agni",
+          "question": "சமீபத்தில் உங்கள் பசி மற்றும் செரிமானம் (அக்னி) எப்படி உள்ளது?",
+          "answer": "நன்றாக உள்ளது",
+          "time": "2026-09-13 19:36:23"
+        },
+        {
+          "question_key": "ayush_koshtha",
+          "question": "சமீபத்தில் உங்கள் மலம் கழிக்கும் பழக்கம் (கோஷ்டம்) எப்படி உள்ளது?",
+          "answer": "ஒழுங்காக",
+          "time": "2026-09-13 19:36:29"
+        },
+        {
+          "question_key": "ayush_ahara",
+          "question": "எந்த உணவு, உணவு நேரம் அல்லது உணவுப் பழக்கம் இந்த பிரச்சனையை மாற்றியிருக்கிறதா அல்லது தூண்டியிருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 19:36:37"
+        },
+        {
+          "question_key": "ayush_vihara",
+          "question": "சமீபத்தில் உங்கள் தூக்கம், தினசரி செயல்பாடு, வேலை அல்லது உடற்பயிற்சி பழக்கத்தில் மாற்றம் ஏற்பட்டுள்ளதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 19:36:43"
+        },
+        {
+          "question_key": "ayush_nidana",
+          "question": "எந்த உணவு, செயல்பாடு, தூக்கம், பருவநிலை அல்லது தினசரி பழக்கம் இந்த பிரச்சனையை அதிகரிக்கிறது அல்லது குறைக்கிறது?",
+          "answer": "செயல்பாடு",
+          "time": "2026-09-13 19:36:56"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "headache"
+      ],
+      "created_at": "2026-09-13 19:36:02",
+      "updated_at": "2026-09-13 19:36:56"
+    },
+    "CASE-C996BC47": {
+      "id": "CASE-C996BC47",
+      "patient_id": "PT-1DCC4835",
+      "mode": "AYUSH",
+      "language": "English",
+      "status": "WAITING",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "What is your main health problem today?",
+          "answer": "Stomach problem",
+          "time": "2026-09-13 19:38:04"
+        },
+        {
+          "question_key": "ayush_agni",
+          "question": "How has your appetite and digestion (Agni) been recently?",
+          "answer": "Good",
+          "time": "2026-09-13 19:38:07"
+        },
+        {
+          "question_key": "ayush_koshtha",
+          "question": "How have your bowel habits (Koshtha) been recently?",
+          "answer": "Regular",
+          "time": "2026-09-13 19:38:12"
+        },
+        {
+          "question_key": "ayush_ahara",
+          "question": "Have any foods, meal timings, or eating habits changed or triggered the problem?",
+          "answer": "Yes",
+          "time": "2026-09-13 19:38:18"
+        },
+        {
+          "question_key": "ayush_vihara",
+          "question": "Have your sleep, daily activity, work, or exercise habits changed recently?",
+          "answer": "No",
+          "time": "2026-09-13 19:38:25"
+        },
+        {
+          "question_key": "ayush_nidana",
+          "question": "What food, activity, sleep pattern, season, or routine seems to worsen or relieve the problem?",
+          "answer": "Activity",
+          "time": "2026-09-13 19:38:28"
+        },
+        {
+          "question_key": "ayush_prakriti",
+          "question": "Compared with your usual Prakriti or natural body pattern, what has changed recently?",
+          "answer": "Clear change",
+          "time": "2026-09-13 19:38:32"
+        },
+        {
+          "question_key": "ayush_vikriti",
+          "question": "What feels different from your usual state (Vikriti) at present?",
+          "answer": "no",
+          "time": "2026-09-13 19:38:41"
+        },
+        {
+          "question_key": "ayush_satmya",
+          "question": "Have there been any recent changes in what foods, climate, or routines suit you comfortably?",
+          "answer": "Yes",
+          "time": "2026-09-13 19:38:47"
+        },
+        {
+          "question_key": "ayush_vaya",
+          "question": "Has your energy or ability to carry out your usual activities changed?",
+          "answer": "Reduced",
+          "time": "2026-09-13 19:38:52"
+        },
+        {
+          "question_key": "general_location",
+          "question": "Where exactly is the problem or discomfort?",
+          "answer": "no",
+          "time": "2026-09-13 19:38:58"
+        },
+        {
+          "question_key": "general_character",
+          "question": "How would you describe the problem in your own words?",
+          "answer": "dibpression",
+          "time": "2026-09-13 19:39:19"
+        },
+        {
+          "question_key": "general_triggers",
+          "question": "What seems to make the problem better or worse?",
+          "answer": "yes",
+          "time": "2026-09-13 19:39:28"
+        },
+        {
+          "question_key": "general_associated",
+          "question": "Are there any other symptoms happening at the same time?",
+          "answer": "no",
+          "time": "2026-09-13 19:39:42"
+        },
+        {
+          "question_key": "general_function",
+          "question": "Has this problem affected your sleep, walking, work, eating, or other normal activities?",
+          "answer": "No",
+          "time": "2026-09-13 19:39:49"
+        },
+        {
+          "question_key": "general_exposure",
+          "question": "Was there any recent travel, injury, new food, medicine, or environmental exposure before this started?",
+          "answer": "Not sure",
+          "time": "2026-09-13 19:39:52"
+        },
+        {
+          "question_key": "general_previous",
+          "question": "Have you consulted a doctor or taken any treatment for this problem already?",
+          "answer": "Yes",
+          "time": "2026-09-13 19:39:54"
+        },
+        {
+          "question_key": "general_concern",
+          "question": "Is there anything about this problem that is especially worrying you?",
+          "answer": "yes",
+          "time": "2026-09-13 19:39:58"
+        },
+        {
+          "question_key": "duration",
+          "question": "How long have you had this problem?",
+          "answer": "4–7 days",
+          "time": "2026-09-13 19:40:07"
+        },
+        {
+          "question_key": "onset",
+          "question": "Did the problem start suddenly or gradually?",
+          "answer": "Suddenly",
+          "time": "2026-09-13 19:40:10"
+        },
+        {
+          "question_key": "severity",
+          "question": "How severe is the problem right now?",
+          "answer": "Mild",
+          "time": "2026-09-13 19:40:13"
+        },
+        {
+          "question_key": "progression",
+          "question": "Is the problem getting better, worse, or staying about the same?",
+          "answer": "Better",
+          "time": "2026-09-13 19:40:15"
+        },
+        {
+          "question_key": "previous_episode",
+          "question": "Have you had a similar problem before?",
+          "answer": "Yes",
+          "time": "2026-09-13 19:40:18"
+        },
+        {
+          "question_key": "medical_history",
+          "question": "Do you have any existing medical conditions such as diabetes, blood pressure, asthma, or heart problems?",
+          "answer": "Yes",
+          "time": "2026-09-13 19:40:20"
+        },
+        {
+          "question_key": "medical_conditions_detail",
+          "question": "Please tell us which medical conditions you have and, if known, how long you have had them.",
+          "answer": "no",
+          "time": "2026-09-13 19:40:25"
+        },
+        {
+          "question_key": "medications",
+          "question": "Are you currently taking any regular medicines?",
+          "answer": "Yes",
+          "time": "2026-09-13 19:40:29"
+        },
+        {
+          "question_key": "medications_detail",
+          "question": "Please tell us the regular medicines you currently take, including names or doses if you know them.",
+          "answer": "no",
+          "time": "2026-09-13 19:40:39"
+        },
+        {
+          "question_key": "allergies",
+          "question": "Do you have any known medicine or food allergies?",
+          "answer": "Not sure",
+          "time": "2026-09-13 19:40:44"
+        },
+        {
+          "question_key": "surgery_history",
+          "question": "Have you had any major surgery or hospital admission in the past?",
+          "answer": "Not sure",
+          "time": "2026-09-13 19:40:47"
+        },
+        {
+          "question_key": "family_history",
+          "question": "Is there any relevant medical condition that runs in your family?",
+          "answer": "Not sure",
+          "time": "2026-09-13 19:40:50"
+        },
+        {
+          "question_key": "lifestyle",
+          "question": "Has anything in your recent food, sleep, work, activity, or daily routine changed?",
+          "answer": "No",
+          "time": "2026-09-13 19:40:57"
+        }
+      ],
+      "summary": {
+        "chief_complaint": "Stomach problem",
+        "clinical_text": "Chief complaint: Stomach problem\nDetected symptom areas: Not clearly detected\nDuration: 4–7 days\nOnset: Suddenly\nSeverity: Mild\nProgression: Better\nPrevious Episode: Yes\nMedical History: Yes\nMedications: Yes\nAllergies: Not sure\nSurgery History: Not sure\nFamily History: Not sure\nLifestyle: No\nSymptom-specific and adaptive answers:\n- ayush_agni: Good\n- ayush_koshtha: Regular\n- ayush_ahara: Yes\n- ayush_vihara: No\n- ayush_nidana: Activity\n- ayush_prakriti: Clear change\n- ayush_vikriti: no\n- ayush_satmya: Yes\n- ayush_vaya: Reduced\n- general_location: no\n- general_character: dibpression\n- general_triggers: yes\n- general_associated: no\n- general_function: No\n- general_exposure: Not sure\n- general_previous: Yes\n- general_concern: yes\n- medical_conditions_detail: no\n- medications_detail: no\nAI-assisted draft; clinician verification required.",
+        "answered_questions": 31,
+        "detected_symptoms": [],
+        "safety_screen": "NORMAL",
+        "adaptive_interview": true,
+        "note": "AI-assisted draft; clinician verification required."
+      },
+      "documents": [],
+      "department_id": "D6",
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [],
+      "created_at": "2026-09-13 19:37:58",
+      "updated_at": "2026-09-13 19:40:57"
+    },
+    "CASE-AA912A1B": {
+      "id": "CASE-AA912A1B",
+      "patient_id": "PT-E81E5EF2",
+      "mode": "AYUSH",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "வயிற்றுப் பிரச்சனை",
+          "time": "2026-09-13 19:41:33"
+        },
+        {
+          "question_key": "ayush_agni",
+          "question": "சமீபத்தில் உங்கள் பசி மற்றும் செரிமானம் (அக்னி) எப்படி உள்ளது?",
+          "answer": "நன்றாக உள்ளது",
+          "time": "2026-09-13 19:41:43"
+        },
+        {
+          "question_key": "ayush_koshtha",
+          "question": "சமீபத்தில் உங்கள் மலம் கழிக்கும் பழக்கம் (கோஷ்டம்) எப்படி உள்ளது?",
+          "answer": "மலச்சிக்கல்",
+          "time": "2026-09-13 19:41:50"
+        },
+        {
+          "question_key": "ayush_ahara",
+          "question": "எந்த உணவு, உணவு நேரம் அல்லது உணவுப் பழக்கம் இந்த பிரச்சனையை மாற்றியிருக்கிறதா அல்லது தூண்டியிருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 19:41:56"
+        },
+        {
+          "question_key": "ayush_vihara",
+          "question": "சமீபத்தில் உங்கள் தூக்கம், தினசரி செயல்பாடு, வேலை அல்லது உடற்பயிற்சி பழக்கத்தில் மாற்றம் ஏற்பட்டுள்ளதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 19:42:01"
+        },
+        {
+          "question_key": "ayush_nidana",
+          "question": "எந்த உணவு, செயல்பாடு, தூக்கம், பருவநிலை அல்லது தினசரி பழக்கம் இந்த பிரச்சனையை அதிகரிக்கிறது அல்லது குறைக்கிறது?",
+          "answer": "தூக்கம்",
+          "time": "2026-09-13 19:42:08"
+        },
+        {
+          "question_key": "ayush_prakriti",
+          "question": "உங்கள் வழக்கமான பிரகிருதி அல்லது இயல்பான உடல் தன்மையுடன் ஒப்பிடும்போது சமீபத்தில் என்ன மாற்றம் ஏற்பட்டுள்ளது?",
+          "answer": "தெளிவான மாற்றம்",
+          "time": "2026-09-13 19:42:11"
+        },
+        {
+          "question_key": "ayush_vikriti",
+          "question": "தற்போது உங்கள் வழக்கமான நிலையை (விகிருதி) விட என்ன வேறுபாடாக உணர்கிறீர்கள்?",
+          "answer": "no",
+          "time": "2026-09-13 19:42:21"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [],
+      "created_at": "2026-09-13 19:41:28",
+      "updated_at": "2026-09-13 19:42:21"
+    },
+    "CASE-4BF8F70B": {
+      "id": "CASE-4BF8F70B",
+      "patient_id": "PT-5159F8D2",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "WAITING",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "தலைவலி இருக்கிறது",
+          "time": "2026-09-13 20:14:34"
+        },
+        {
+          "question_key": "head_location",
+          "question": "தலைவலி எந்த இடத்தில் உள்ளது?",
+          "answer": "ஒரு பக்கமா வலிக்குது",
+          "time": "2026-09-13 20:14:55"
+        },
+        {
+          "question_key": "head_character",
+          "question": "தலைவலி எப்படி உணரப்படுகிறது?",
+          "answer": "நான் விட்டு விட்டு வலிக்குது",
+          "time": "2026-09-13 20:15:10"
+        },
+        {
+          "question_key": "head_trigger",
+          "question": "எதனால் தலைவலி அதிகரிக்கிறது அல்லது குறைகிறது?",
+          "answer": "வீட்ல ரொம்ப தலை வலிக்குது",
+          "time": "2026-09-13 20:15:27"
+        },
+        {
+          "question_key": "head_nausea",
+          "question": "தலைவலியுடன் வாந்தி உணர்வு அல்லது வாந்தி இருக்கிறதா?",
+          "answer": "அதெல்லாம் எதுவும் இல்லை",
+          "time": "2026-09-13 20:16:00"
+        },
+        {
+          "question_key": "head_light",
+          "question": "வெளிச்சம் அல்லது சத்தத்தை வழக்கத்தைவிட அதிகமாக பொறுக்க முடியவில்லையா?",
+          "answer": "ஆமாம் ஆமாம்",
+          "time": "2026-09-13 20:16:18"
+        },
+        {
+          "question_key": "head_vision",
+          "question": "பார்வையில் புதிய மாற்றம் ஏதேனும் ஏற்பட்டுள்ளதா?",
+          "answer": "அதெல்லாம் இல்ல",
+          "time": "2026-09-13 20:16:42"
+        },
+        {
+          "question_key": "head_neuro",
+          "question": "பலவீனம், உணர்வின்மை, பேசுவதில் சிரமம், குழப்பம் அல்லது மயக்கம் உள்ளதா?",
+          "answer": "அதெல்லாம் எதுவும் இல்லை",
+          "time": "2026-09-13 20:17:01"
+        },
+        {
+          "question_key": "head_fever",
+          "question": "தலைவலியுடன் காய்ச்சல், கழுத்து இறுக்கம் அல்லது புதிய தோல் சொறி உள்ளதா?",
+          "answer": "இல்ல இல்ல",
+          "time": "2026-09-13 20:17:23"
+        },
+        {
+          "question_key": "head_previous",
+          "question": "இதுபோன்ற தலைவலி முன்பு ஏற்பட்டுள்ளதா?",
+          "answer": "முன்னாடி எல்லாம் ஏற்பட்டது இல்லை",
+          "time": "2026-09-13 20:17:32"
+        },
+        {
+          "question_key": "head_injury",
+          "question": "சமீபத்தில் தலையில் காயம் ஏற்பட்ட பிறகு தலைவலி தொடங்கியதா?",
+          "answer": "அதெல்லாம் இல்லை சாதாரணமாக தான் வழி தொடங்கியது",
+          "time": "2026-09-13 20:17:57"
+        },
+        {
+          "question_key": "duration",
+          "question": "இந்த பிரச்சனை எத்தனை நாட்களாக உள்ளது?",
+          "answer": "இரண்டு நாட்களாக",
+          "time": "2026-09-13 20:18:05"
+        },
+        {
+          "question_key": "onset",
+          "question": "இந்த பிரச்சனை திடீரெனவா அல்லது மெதுவாகவா தொடங்கியது?",
+          "answer": "மெதுவாக",
+          "time": "2026-09-13 20:18:12"
+        },
+        {
+          "question_key": "severity",
+          "question": "இப்போது இந்த பிரச்சனை எவ்வளவு தீவிரமாக உள்ளது?",
+          "answer": "மிதமானது",
+          "time": "2026-09-13 20:18:15"
+        },
+        {
+          "question_key": "progression",
+          "question": "இந்த பிரச்சனை குறைகிறதா, அதிகரிக்கிறதா அல்லது அப்படியே உள்ளதா?",
+          "answer": "குறைகிறது",
+          "time": "2026-09-13 20:18:18"
+        },
+        {
+          "question_key": "previous_episode",
+          "question": "இதுபோன்ற பிரச்சனை முன்பு ஏற்பட்டுள்ளதா?",
+          "answer": "தெரியவில்லை",
+          "time": "2026-09-13 20:18:20"
+        },
+        {
+          "question_key": "medical_history",
+          "question": "சர்க்கரை நோய், ரத்த அழுத்தம், ஆஸ்துமா அல்லது இதயப் பிரச்சனை போன்ற ஏதேனும் உடல்நலப் பிரச்சனைகள் உள்ளதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 20:18:23"
+        },
+        {
+          "question_key": "medical_conditions_detail",
+          "question": "உங்களுக்கு உள்ள உடல்நலப் பிரச்சனைகள் என்ன? தெரிந்தால் எத்தனை காலமாக உள்ளது என்பதையும் சொல்லுங்கள்.",
+          "answer": "அதெல்லாம் இல்லை",
+          "time": "2026-09-13 20:18:51"
+        },
+        {
+          "question_key": "medications",
+          "question": "நீங்கள் தற்போது ஏதேனும் வழக்கமான மருந்துகள் எடுத்துக்கொள்கிறீர்களா?",
+          "answer": "இல்லை",
+          "time": "2026-09-13 20:18:58"
+        },
+        {
+          "question_key": "allergies",
+          "question": "",
+          "answer": "இல்லை",
+          "time": "2026-09-13 20:19:21"
+        },
+        {
+          "question_key": "surgery_history",
+          "question": "",
+          "answer": "இல்லை",
+          "time": "2026-09-13 20:19:42"
+        },
+        {
+          "question_key": "family_history",
+          "question": "உங்கள் குடும்பத்தில் இதுபோன்ற அல்லது முக்கியமான உடல்நலப் பிரச்சனை உள்ளவர்களா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 20:19:46"
+        },
+        {
+          "question_key": "lifestyle",
+          "question": "சமீபத்தில் உங்கள் உணவு, தூக்கம், வேலை, உடற்பயிற்சி அல்லது தினசரி பழக்கத்தில் ஏதேனும் மாற்றம் ஏற்பட்டுள்ளதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-13 20:19:51"
+        }
+      ],
+      "summary": {
+        "chief_complaint": "தலைவலி இருக்கிறது",
+        "clinical_text": "Chief complaint: தலைவலி இருக்கிறது\nDetected symptom areas: headache\nDuration: இரண்டு நாட்களாக\nOnset: மெதுவாக\nSeverity: மிதமானது\nProgression: குறைகிறது\nPrevious Episode: தெரியவில்லை\nMedical History: ஆம்\nMedications: இல்லை\nAllergies: இல்லை\nSurgery History: இல்லை\nFamily History: ஆம்\nLifestyle: ஆம்\nSymptom-specific and adaptive answers:\n- head_location: ஒரு பக்கமா வலிக்குது\n- head_character: நான் விட்டு விட்டு வலிக்குது\n- head_trigger: வீட்ல ரொம்ப தலை வலிக்குது\n- head_nausea: அதெல்லாம் எதுவும் இல்லை\n- head_light: ஆமாம் ஆமாம்\n- head_vision: அதெல்லாம் இல்ல\n- head_neuro: அதெல்லாம் எதுவும் இல்லை\n- head_fever: இல்ல இல்ல\n- head_previous: முன்னாடி எல்லாம் ஏற்பட்டது இல்லை\n- head_injury: அதெல்லாம் இல்லை சாதாரணமாக தான் வழி தொடங்கியது\n- medical_conditions_detail: அதெல்லாம் இல்லை\nAI-assisted draft; clinician verification required.",
+        "answered_questions": 23,
+        "detected_symptoms": [
+          "headache"
+        ],
+        "safety_screen": "NORMAL",
+        "adaptive_interview": true,
+        "note": "AI-assisted draft; clinician verification required."
+      },
+      "documents": [],
+      "department_id": "D1",
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "headache"
+      ],
+      "created_at": "2026-09-13 20:13:16",
+      "updated_at": "2026-09-13 20:19:51"
+    },
+    "CASE-0AF15D3E": {
+      "id": "CASE-0AF15D3E",
+      "patient_id": "PT-2FC97958",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "தலைவலி",
+          "time": "2026-09-14 16:19:53"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "headache"
+      ],
+      "created_at": "2026-09-14 16:17:01",
+      "updated_at": "2026-09-14 16:19:53"
+    },
+    "CASE-14446CD8": {
+      "id": "CASE-14446CD8",
+      "patient_id": "PT-5D4E482E",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "வாந்தி அல்லது வயிற்றுப்போக்கு",
+          "time": "2026-09-14 16:20:31"
+        },
+        {
+          "question_key": "vomit_frequency",
+          "question": "எவ்வளவு அடிக்கடி வாந்தி வருகிறது?",
+          "answer": "ஒரு முறை",
+          "time": "2026-09-14 16:20:36"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "vomiting",
+        "diarrhea"
+      ],
+      "created_at": "2026-09-14 16:20:14",
+      "updated_at": "2026-09-14 16:20:36"
+    },
+    "CASE-B5BC52F6": {
+      "id": "CASE-B5BC52F6",
+      "patient_id": "PT-3E14C683",
+      "mode": "AYUSH",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "தோல் பிரச்சனை",
+          "time": "2026-09-14 16:21:19"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "skin"
+      ],
+      "created_at": "2026-09-14 16:21:05",
+      "updated_at": "2026-09-14 16:21:19"
+    },
+    "CASE-F8AF2E8F": {
+      "id": "CASE-F8AF2E8F",
+      "patient_id": "PT-B94B2480",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "காய்ச்சல்",
+          "time": "2026-09-14 16:22:00"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "fever"
+      ],
+      "created_at": "2026-09-14 16:21:53",
+      "updated_at": "2026-09-14 16:22:00"
+    },
+    "CASE-AB916973": {
+      "id": "CASE-AB916973",
+      "patient_id": "PT-744E0157",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "வயிற்றுப் பிரச்சனை",
+          "time": "2026-09-14 16:39:16"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [],
+      "created_at": "2026-09-14 16:38:48",
+      "updated_at": "2026-09-14 16:39:16"
+    },
+    "CASE-0482A8A9": {
+      "id": "CASE-0482A8A9",
+      "patient_id": "PT-B0D06829",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "காய்ச்சல்",
+          "time": "2026-09-14 16:47:24"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "fever"
+      ],
+      "created_at": "2026-09-14 16:47:17",
+      "updated_at": "2026-09-14 16:47:24"
+    },
+    "CASE-81C1542B": {
+      "id": "CASE-81C1542B",
+      "patient_id": "PT-1BADA335",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "காய்ச்சல்",
+          "time": "2026-09-14 17:51:23"
+        },
+        {
+          "question_key": "fever_pattern",
+          "question": "காய்ச்சல் தொடர்ந்து இருக்கிறதா அல்லது வந்து போகிறதா?",
+          "answer": "தொடர்ந்து",
+          "time": "2026-09-14 17:51:31"
+        },
+        {
+          "question_key": "fever_temperature",
+          "question": "உங்கள் உடல் வெப்பநிலையை அளந்தீர்களா? அளந்திருந்தால் அதிகபட்சமாக எவ்வளவு இருந்தது?",
+          "answer": "அளந்தேன்",
+          "time": "2026-09-14 17:51:42"
+        },
+        {
+          "question_key": "fever_chills",
+          "question": "காய்ச்சலுடன் குளிர் நடுக்கம் இருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-14 17:51:53"
+        },
+        {
+          "question_key": "fever_bodypain",
+          "question": "உடல் வலி, தசை வலி அல்லது வழக்கத்திற்கு மாறான சோர்வு இருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-14 17:52:02"
+        },
+        {
+          "question_key": "fever_headache",
+          "question": "காய்ச்சலுடன் தலைவலி இருக்கிறதா?",
+          "answer": "ஆம்",
+          "time": "2026-09-14 17:52:07"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "fever"
+      ],
+      "created_at": "2026-09-14 17:51:09",
+      "updated_at": "2026-09-14 17:52:07"
+    },
+    "CASE-067E9A0A": {
+      "id": "CASE-067E9A0A",
+      "patient_id": "PT-FAADF6A9",
+      "mode": "NORMAL",
+      "language": "Tamil",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "இன்று உங்களுக்கு முக்கியமாக என்ன உடல்நலப் பிரச்சனை உள்ளது?",
+          "answer": "காய்ச்சல்",
+          "time": "2026-09-14 21:54:42"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "fever"
+      ],
+      "created_at": "2026-09-14 21:54:34",
+      "updated_at": "2026-09-14 21:54:42"
+    },
+    "CASE-77843FEB": {
+      "id": "CASE-77843FEB",
+      "patient_id": "PT-5D05E1B4",
+      "mode": "NORMAL",
+      "language": "English",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "What is your main health problem today?",
+          "answer": "Headache",
+          "time": "2026-09-14 21:55:13"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "headache"
+      ],
+      "created_at": "2026-09-14 21:55:07",
+      "updated_at": "2026-09-14 21:55:13"
+    },
+    "CASE-66E81C33": {
+      "id": "CASE-66E81C33",
+      "patient_id": "PT-970F9E26",
+      "mode": "NORMAL",
+      "language": "English",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "",
+          "answer": "Joint or body pain",
+          "time": "2026-09-17 10:28:42"
+        },
+        {
+          "question_key": "general_location",
+          "question": "Where exactly is the problem or discomfort?",
+          "answer": "left hand elbow",
+          "time": "2026-09-17 10:30:46"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [],
+      "created_at": "2026-09-17 10:27:34",
+      "updated_at": "2026-09-17 10:30:46"
+    },
+    "CASE-0B375D71": {
+      "id": "CASE-0B375D71",
+      "patient_id": "PT-ABAA1203",
+      "mode": "AYUSH",
+      "language": "English",
+      "status": "WAITING",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "What is your main health problem today?",
+          "answer": "Stomach problem",
+          "time": "2026-09-17 10:32:20"
+        },
+        {
+          "question_key": "ayush_agni",
+          "question": "How has your appetite and digestion (Agni) been recently?",
+          "answer": "Not sure",
+          "time": "2026-09-17 10:32:42"
+        },
+        {
+          "question_key": "ayush_koshtha",
+          "question": "How have your bowel habits (Koshtha) been recently?",
+          "answer": "Loose stools",
+          "time": "2026-09-17 10:32:50"
+        },
+        {
+          "question_key": "ayush_ahara",
+          "question": "Have any foods, meal timings, or eating habits changed or triggered the problem?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:33:03"
+        },
+        {
+          "question_key": "ayush_vihara",
+          "question": "Have your sleep, daily activity, work, or exercise habits changed recently?",
+          "answer": "Not sure",
+          "time": "2026-09-17 10:33:05"
+        },
+        {
+          "question_key": "ayush_nidana",
+          "question": "What food, activity, sleep pattern, season, or routine seems to worsen or relieve the problem?",
+          "answer": "Sleep",
+          "time": "2026-09-17 10:33:08"
+        },
+        {
+          "question_key": "ayush_prakriti",
+          "question": "Compared with your usual Prakriti or natural body pattern, what has changed recently?",
+          "answer": "Clear change",
+          "time": "2026-09-17 10:33:11"
+        },
+        {
+          "question_key": "ayush_vikriti",
+          "question": "What feels different from your usual state (Vikriti) at present?",
+          "answer": "dfjaklhsdhkgsadfg",
+          "time": "2026-09-17 10:33:31"
+        },
+        {
+          "question_key": "ayush_satmya",
+          "question": "Have there been any recent changes in what foods, climate, or routines suit you comfortably?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:33:39"
+        },
+        {
+          "question_key": "ayush_vaya",
+          "question": "Has your energy or ability to carry out your usual activities changed?",
+          "answer": "Reduced",
+          "time": "2026-09-17 10:33:44"
+        },
+        {
+          "question_key": "diarrhea_frequency",
+          "question": "How many loose stools have you had today?",
+          "answer": "1–2",
+          "time": "2026-09-17 10:33:48"
+        },
+        {
+          "question_key": "diarrhea_blood",
+          "question": "Have you noticed blood or black stool?",
+          "answer": "Not sure",
+          "time": "2026-09-17 10:33:51"
+        },
+        {
+          "question_key": "diarrhea_vomit",
+          "question": "Do you also have vomiting or nausea?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:33:54"
+        },
+        {
+          "question_key": "diarrhea_fever",
+          "question": "Do you have fever or abdominal cramps?",
+          "answer": "Not sure",
+          "time": "2026-09-17 10:33:56"
+        },
+        {
+          "question_key": "diarrhea_fluid",
+          "question": "Are you able to drink and keep fluids down normally?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:33:59"
+        },
+        {
+          "question_key": "diarrhea_exposure",
+          "question": "Did this start after outside food, unsafe water, or contact with someone with diarrhea?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:34:01"
+        },
+        {
+          "question_key": "duration",
+          "question": "How long have you had this problem?",
+          "answer": "1–3 days",
+          "time": "2026-09-17 10:34:04"
+        },
+        {
+          "question_key": "onset",
+          "question": "Did the problem start suddenly or gradually?",
+          "answer": "Not sure",
+          "time": "2026-09-17 10:34:08"
+        },
+        {
+          "question_key": "severity",
+          "question": "How severe is the problem right now?",
+          "answer": "Mild",
+          "time": "2026-09-17 10:34:10"
+        },
+        {
+          "question_key": "progression",
+          "question": "Is the problem getting better, worse, or staying about the same?",
+          "answer": "About the same",
+          "time": "2026-09-17 10:34:13"
+        },
+        {
+          "question_key": "previous_episode",
+          "question": "Have you had a similar problem before?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:34:15"
+        },
+        {
+          "question_key": "medical_history",
+          "question": "Do you have any existing medical conditions such as diabetes, blood pressure, asthma, or heart problems?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:34:17"
+        },
+        {
+          "question_key": "medical_conditions_detail",
+          "question": "Please tell us which medical conditions you have and, if known, how long you have had them.",
+          "answer": "no",
+          "time": "2026-09-17 10:34:26"
+        },
+        {
+          "question_key": "medications",
+          "question": "Are you currently taking any regular medicines?",
+          "answer": "No",
+          "time": "2026-09-17 10:34:29"
+        },
+        {
+          "question_key": "allergies",
+          "question": "Do you have any known medicine or food allergies?",
+          "answer": "Not sure",
+          "time": "2026-09-17 10:34:32"
+        },
+        {
+          "question_key": "surgery_history",
+          "question": "Have you had any major surgery or hospital admission in the past?",
+          "answer": "Not sure",
+          "time": "2026-09-17 10:34:54"
+        },
+        {
+          "question_key": "family_history",
+          "question": "Is there any relevant medical condition that runs in your family?",
+          "answer": "Yes",
+          "time": "2026-09-17 10:34:57"
+        },
+        {
+          "question_key": "lifestyle",
+          "question": "Has anything in your recent food, sleep, work, activity, or daily routine changed?",
+          "answer": "No",
+          "time": "2026-09-17 10:34:59"
+        }
+      ],
+      "summary": {
+        "chief_complaint": "Stomach problem",
+        "clinical_text": "Chief complaint: Stomach problem\nDetected symptom areas: diarrhea\nDuration: 1–3 days\nOnset: Not sure\nSeverity: Mild\nProgression: About the same\nPrevious Episode: Yes\nMedical History: Yes\nMedications: No\nAllergies: Not sure\nSurgery History: Not sure\nFamily History: Yes\nLifestyle: No\nSymptom-specific and adaptive answers:\n- ayush_agni: Not sure\n- ayush_koshtha: Loose stools\n- ayush_ahara: Yes\n- ayush_vihara: Not sure\n- ayush_nidana: Sleep\n- ayush_prakriti: Clear change\n- ayush_vikriti: dfjaklhsdhkgsadfg\n- ayush_satmya: Yes\n- ayush_vaya: Reduced\n- diarrhea_frequency: 1–2\n- diarrhea_blood: Not sure\n- diarrhea_vomit: Yes\n- diarrhea_fever: Not sure\n- diarrhea_fluid: Yes\n- diarrhea_exposure: Yes\n- medical_conditions_detail: no\nAI-assisted draft; clinician verification required.",
+        "answered_questions": 28,
+        "detected_symptoms": [
+          "diarrhea"
+        ],
+        "safety_screen": "NORMAL",
+        "adaptive_interview": true,
+        "note": "AI-assisted draft; clinician verification required."
+      },
+      "documents": [],
+      "department_id": "D6",
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "diarrhea"
+      ],
+      "created_at": "2026-09-17 10:32:05",
+      "updated_at": "2026-09-17 10:34:59"
+    },
+    "CASE-5E242FFE": {
+      "id": "CASE-5E242FFE",
+      "patient_id": "PT-31613974",
+      "mode": "AYUSH",
+      "language": "English",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [],
+      "created_at": "2026-09-17 10:51:33",
+      "updated_at": "2026-09-17 10:51:33"
+    },
+    "CASE-95F22FA7": {
+      "id": "CASE-95F22FA7",
+      "patient_id": "PT-9A03A1B9",
+      "mode": "NORMAL",
+      "language": "English",
+      "status": "INTAKE",
+      "priority": "NORMAL",
+      "answers": [
+        {
+          "question_key": "chief_complaint",
+          "question": "What is your main health problem today?",
+          "answer": "Skin problem",
+          "time": "2026-09-18 22:42:37"
+        }
+      ],
+      "summary": {},
+      "documents": [],
+      "department_id": null,
+      "doctor_name": null,
+      "token": null,
+      "detected_symptoms": [
+        "skin"
+      ],
+      "created_at": "2026-09-18 22:42:33",
+      "updated_at": "2026-09-18 22:42:37"
+    }
+  },
+  "audit": [
+    {
+      "time": "2026-09-18 22:42:32",
+      "actor": "PT-9A03A1B9",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-17 10:51:30",
+      "actor": "PT-31613974",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-17 10:49:29",
+      "actor": "admin@hospital.local",
+      "action": "Login: ADMIN"
+    },
+    {
+      "time": "2026-09-17 10:48:25",
+      "actor": "generalmedicine@hospital.local",
+      "action": "Login: DOCTOR"
+    },
+    {
+      "time": "2026-09-17 10:35:03",
+      "actor": "PT-ABAA1203",
+      "action": "Clinical intake completed; routed to Ayurveda"
+    },
+    {
+      "time": "2026-09-17 10:31:43",
+      "actor": "PT-ABAA1203",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-17 10:27:29",
+      "actor": "PT-970F9E26",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 21:55:06",
+      "actor": "PT-5D05E1B4",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 21:54:33",
+      "actor": "PT-FAADF6A9",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 17:51:08",
+      "actor": "PT-1BADA335",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 16:47:16",
+      "actor": "PT-B0D06829",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 16:38:47",
+      "actor": "PT-744E0157",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 16:21:51",
+      "actor": "PT-B94B2480",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 16:21:03",
+      "actor": "PT-3E14C683",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 16:20:12",
+      "actor": "PT-5D4E482E",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-14 16:17:00",
+      "actor": "PT-2FC97958",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 20:19:54",
+      "actor": "PT-5159F8D2",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 20:13:15",
+      "actor": "PT-5159F8D2",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 19:41:26",
+      "actor": "PT-E81E5EF2",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 19:41:06",
+      "actor": "PT-1DCC4835",
+      "action": "Clinical intake completed; routed to Ayurveda"
+    },
+    {
+      "time": "2026-09-13 19:40:59",
+      "actor": "PT-1DCC4835",
+      "action": "Clinical intake completed; routed to Ayurveda"
+    },
+    {
+      "time": "2026-09-13 19:37:55",
+      "actor": "PT-1DCC4835",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 19:36:00",
+      "actor": "PT-6FED0FFC",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 19:35:31",
+      "actor": "PT-8C9235B3",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 19:34:55",
+      "actor": "PT-985B89D6",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 19:34:21",
+      "actor": "PT-DED72E35",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 18:54:43",
+      "actor": "PT-91756C43",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 18:53:51",
+      "actor": "PT-F7BC5585",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 18:35:37",
+      "actor": "PT-49492E51",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 12:33:28",
+      "actor": "PT-FFD2B63E",
+      "action": "Clinical intake completed; routed to Ayurveda"
+    },
+    {
+      "time": "2026-09-13 12:33:28",
+      "actor": "PT-FFD2B63E",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 12:33:28",
+      "actor": "PT-5E3894F9",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 12:33:28",
+      "actor": "PT-5E3894F9",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 16:27:15",
+      "actor": "PT-59EEE913",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 16:24:58",
+      "actor": "PT-DAC5C286",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 16:24:38",
+      "actor": "PT-A48EE123",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 16:23:59",
+      "actor": "PT-A48EE123",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 16:00:24",
+      "actor": "PT-3030754F",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 16:00:06",
+      "actor": "PT-D25FA1EC",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 15:59:32",
+      "actor": "PT-8FDE3F74",
+      "action": "Clinical intake completed; routed to Ayurveda"
+    },
+    {
+      "time": "2026-09-13 15:59:25",
+      "actor": "PT-8FDE3F74",
+      "action": "Clinical intake completed; routed to Ayurveda"
+    },
+    {
+      "time": "2026-09-13 15:58:51",
+      "actor": "PT-8FDE3F74",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 15:58:28",
+      "actor": "PT-591D3D91",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 15:54:20",
+      "actor": "PT-2235C671",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 15:54:12",
+      "actor": "PT-2235C671",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 15:53:45",
+      "actor": "PT-2235C671",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 15:52:59",
+      "actor": "PT-1F0AB3E3",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 15:52:53",
+      "actor": "PT-1F0AB3E3",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 15:50:26",
+      "actor": "PT-1F0AB3E3",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 15:49:42",
+      "actor": "PT-1F0AB3E3",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 15:49:35",
+      "actor": "PT-1F0AB3E3",
+      "action": "Clinical intake completed; routed to General Medicine"
+    },
+    {
+      "time": "2026-09-13 15:48:26",
+      "actor": "PT-1F0AB3E3",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 14:58:50",
+      "actor": "PT-3289AEA4",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 14:52:21",
+      "actor": "PT-AD91639D",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 14:51:54",
+      "actor": "PT-FAE6E266",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 14:39:45",
+      "actor": "PT-3274D617",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 14:38:41",
+      "actor": "PT-73C25726",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 14:09:10",
+      "actor": "PT-781DC0B2",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 14:07:26",
+      "actor": "PT-B725F0B3",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 13:52:44",
+      "actor": "PT-B61069D1",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 12:27:19",
+      "actor": "PT-084AA7B6",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 12:25:47",
+      "actor": "PT-FCE79010",
+      "action": "Patient kiosk session started"
+    },
+    {
+      "time": "2026-09-13 02:19:32",
+      "actor": "PT-72D52B31",
+      "action": "Patient kiosk session started"
+    }
+  ],
+  "tokens": {}
+}

@@ -1,0 +1,9 @@
+Round 0: key=chest_character
+Round 1: key=chest_spread
+Round 2: key=chest_associated
+Round 3: key=chest_breathing
+Round 4: key=pain_onset
+Round 5: key=pain_trigger
+Round 6: key=pain_function
+Round 7: no Q
+Final seen: ['chest_character', 'chest_spread', 'chest_associated', 'chest_breathing', 'pain_onset', 'pain_trigger', 'pain_function']

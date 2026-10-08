@@ -1,0 +1,29 @@
+MEDIKIOSK SIH 26047 — FINAL PROTOTYPE
+
+1. Install Python 3.11+.
+2. Install dependencies once:
+   py -m pip install -r requirements.txt
+3. Make sure MySQL is running.
+4. Copy .env.example to .env and set MYSQL_PASSWORD (and MYSQL_HOST if needed).
+5. Run RUN_MEDIKIOSK.bat OR: python app.py
+6. Open http://127.0.0.1:5000
+
+IMPORTANT:
+- The first screen is language selection.
+- Patient account is used for stable identity across visits.
+- Patient does NOT select a doctor.
+- Normal flow: language → account → consent → clinical intake → adaptive questions → document AI → routing → queue → doctor review.
+- Urgent/high safety signals go to triage instead of normal queue.
+- AI output is a draft; doctor confirms the final record.
+- OTP is development-visible when ALLOW_DEV_OTP=true. Real email/SMS delivery is an integration point, not faked.
+
+DEMO ACCOUNTS
+Doctor: doctor@medikiosk.local / Doctor@123
+Cardiology: cardio@medikiosk.local / Doctor@123
+Pulmonology: pulmo@medikiosk.local / Doctor@123
+Neurology: neuro@medikiosk.local / Doctor@123
+Orthopaedics: ortho@medikiosk.local / Doctor@123
+Dermatology: derma@medikiosk.local / Doctor@123
+Ayurveda: ayush@medikiosk.local / Doctor@123
+Triage: triage@medikiosk.local / Triage@123
+Admin: admin@medikiosk.local / Admin@123

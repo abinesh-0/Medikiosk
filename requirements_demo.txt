@@ -1,0 +1,2 @@
+# Zero external Python dependencies required for the demo server.
+# Optional production stack: Flask, MySQL/PyMySQL, Tesseract OCR, Whisper, LLM provider.

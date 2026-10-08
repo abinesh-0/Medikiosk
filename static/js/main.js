@@ -1,0 +1,8 @@
+function token(){return localStorage.getItem('mk_token')||''}
+async function api(url,method='GET',body=null,form=false){const o={method,headers:{}};if(token())o.headers.Authorization='Bearer '+token();if(body){if(form)o.body=body;else{o.headers['Content-Type']='application/json';o.body=JSON.stringify(body)}}try{const r=await fetch(url,o);const j=await r.json().catch(()=>({success:false,error:'Invalid server response'}));if(r.status===401&&!['/','/auth','/login','/register'].includes(location.pathname)){localStorage.removeItem('mk_token');location.href='/auth'}return j}catch(e){return {success:false,error:'Cannot reach MediKiosk server'}}}
+function saveAuth(r){localStorage.setItem('mk_token',r.access_token);localStorage.setItem('mk_user',JSON.stringify(r.user||{}));if(r.language)localStorage.setItem('mk_lang',r.language)}
+function logout(){localStorage.removeItem('mk_token');localStorage.removeItem('mk_user');location.href='/'}
+function roleRedirect(role){location.href=role==='PATIENT'?'/patient':role==='DOCTOR'?'/doctor':role==='TRIAGE'?'/triage':'/admin'}
+function toggleLanguage(){const l=localStorage.getItem('mk_lang')==='Tamil'?'English':'Tamil';localStorage.setItem('mk_lang',l);location.reload()}
+function toast(t){const x=document.getElementById('toast');if(x){x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2500)}}
+window.addEventListener('DOMContentLoaded',()=>{if(token()){const b=document.getElementById('logoutBtn');if(b)b.hidden=false;const p=document.getElementById('rolePill');const u=JSON.parse(localStorage.getItem('mk_user')||'{}');if(p)p.textContent=u.role||''}})

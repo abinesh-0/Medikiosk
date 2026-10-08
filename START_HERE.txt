@@ -1,0 +1,28 @@
+MEDIKIOSK – SIH 26047 JUDGE-READY PROTOTYPE
+
+1) Open this folder in VS Code.
+2) Optional: create/activate a venv. The demo runtime uses only Python standard library.
+3) Run: python app.py
+4) Open: http://127.0.0.1:5000
+
+PATIENT DEMO
+- Select English/Tamil
+- Patient details
+- Normal or AYUSH Consultation
+- Adaptive questions (voice + touch/type)
+- Previous medical history -> scan/upload report
+- Clinical summary -> department routing -> token
+
+JUDGE SCENARIO
+Use chest pain + breathing difficulty to demonstrate red-flag escalation.
+Use cough/breathing to demonstrate Pulmonology routing.
+Use AYUSH mode to demonstrate Ayurveda-specific history.
+For document extraction in the offline demo, paste sample report text after selecting a file; the prototype extracts common diagnosis/medicine/investigation patterns.
+
+DEMO ACCOUNTS
+Admin: admin@hospital.local / Admin@123
+Staff: staff@hospital.local / Staff@123
+Department accounts: see data/demo_credentials.txt (default password Dept@123)
+
+IMPORTANT
+This is a hackathon prototype. It is not a diagnostic or treatment system and must not be used for real clinical decisions. Production deployment would add authenticated hospital infrastructure, secure password hashing, TLS, audit controls, real OCR/ASR/LLM services, FHIR/ABDM integration and validated clinical safety workflows.

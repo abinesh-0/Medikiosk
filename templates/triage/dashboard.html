@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}MediKiosk • Staff Triage{% endblock %}{% block content %}
+<div class="khead"><div><span class="eyebrow">DASHBOARD 02 • STAFF / TRIAGE</span><h1>Safety & routing centre</h1><p class="muted">Red flags are screening signals, not diagnoses. Staff review urgency and make the immediate clinical routing decision.</p></div><button class="btn" onclick="logout()">Logout</button></div>
+<div class="grid three"><div class="card stat"><span class="label">Active alerts</span><b id="alertCount">—</b></div><div class="card stat"><span class="label">Urgent</span><b id="urgentCount">—</b></div><div class="card stat"><span class="label">Routing</span><b style="font-size:28px">Live</b></div></div>
+<section class="card"><div class="section-head"><div><span class="badge">SAFETY LAYER</span><h2>Priority alerts</h2></div><span class="pill">Human review</span></div><div id="alerts"></div></section>
+{% endblock %}{% block scripts %}<script src="/static/js/triage.js"></script>{% endblock %}

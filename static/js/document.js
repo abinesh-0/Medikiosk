@@ -1,0 +1,1 @@
+async function uploadDocument(caseId,file){const fd=new FormData();fd.append('file',file);return api('/api/documents/'+caseId+'/upload','POST',fd,true)}

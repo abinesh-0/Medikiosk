@@ -1,0 +1,1 @@
+Create a concise physician-facing draft: chief complaint, HPI, past history, medicines/allergies, family/personal history, ROS, investigations. Clearly label missing or uncertain information.

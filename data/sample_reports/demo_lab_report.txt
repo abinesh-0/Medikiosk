@@ -1,0 +1,6 @@
+DEMO — NOT A REAL MEDICAL RECORD
+Patient: Demo Patient
+Date: 2026-09-01
+Hemoglobin: 13.2 g/dL
+Temperature: 38.2 C
+This synthetic document is for OCR/extraction testing only.

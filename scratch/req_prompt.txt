@@ -1,0 +1,673 @@
+<USER_REQUEST>
+FIX THE AI DOCUMENT CHATBOT RESPONSE LOGIC — MEDICAL REPORT GROUNDED ANSWERS
+
+Do NOT redesign the existing UI.
+Do NOT remove the current report cards, multi-report functionality, language selector, upload/scan functionality, or voice controls.
+
+The current problem is specifically the AI Document Chatbot's reasoning and response generation.
+
+====================================================
+1. CURRENT PROBLEM
+====================================================
+
+After uploading a medical report, the application successfully extracts structured information such as:
+
+Patient:
+Mrs. Ranjana Bhelende
+
+Age:
+54 Years
+
+Sex:
+Female
+
+Report:
+Complete Blood Count / Blood Test
+
+Date:
+28/11/2025
+
+Values:
+Hemoglobin: 12.7 gm%
+Total WBC Count: 8100 /cmm
+Neutrophils: 73%
+Lymphocytes: 20%
+Eosinophils: 03%
+Monocytes: 04%
+Basophils: 00%
+RBC Count: 4.45 mil./cmm
+HCT: 38.9%
+MCV: 87.4 fL
+MCH: 28.6 pg
+MCHC: 32.7 gm/dl
+RDW-CV: 12.6%
+Platelet Count: 308000 /cmm
+MPV: 9.2 fL
+PDW: 16.4 fL
+
+But when the patient asks:
+
+"Explain this report in simple words"
+
+the chatbot currently responds with a generic message such as:
+
+"Based on your report, this information has been reviewed.
+Please consult your physician for clinical decisions."
+
+THIS IS NOT THE REQUIRED BEHAVIOR.
+
+If the report has been successfully extracted and contains sufficient information, the chatbot must actually analyze the extracted information and answer the patient's question.
+
+"Consult your physician" must NOT be used as a generic fallback for every medical question.
+
+====================================================
+2. CORE CHATBOT BEHAVIOR
+====================================================
+
+The AI Document Chatbot must behave as a:
+
+MEDICAL DOCUMENT-GROUNDED CLINICAL INFORMATION ASSISTANT.
+
+It should reason from the currently active patient's uploaded report(s), similar to how a knowledgeable clinical assistant would explain a report.
+
+It must NOT simply repeat the OCR text.
+
+It must interpret the available report data in context.
+
+Example:
+
+Patient asks:
+
+"Explain this report in simple words."
+
+The chatbot should analyze:
+- patient information
+- test type
+- individual results
+- reference ranges
+- abnormal values
+- documented remarks/impressions
+- relationships between relevant values
+
+Then provide a short, clear explanation.
+
+Example response:
+
+"இந்த CBC report-ல் பெரும்பாலான அளவுகள் கொடுக்கப்பட்ட reference range-க்குள் இருக்கின்றன. Hemoglobin 12.7 g/dL, WBC 8100/cmm மற்றும் platelet count 3,08,000/cmm ஆகியவை இந்த report-ல் கொடுக்கப்பட்ட range-க்குள் உள்ளன. Neutrophils 73% என்றும் report-ல் உள்ளது; இது கொடுக்கப்பட்ட 40–75% range-க்குள் உள்ளது. மொத்தமாக இந்த report-ல் பெரிய abnormality குறிப்பிடப்படவில்லை."
+
+The exact response must always be generated from the actual uploaded report.
+
+Do not copy this example response blindly.
+
+====================================================
+3. QUESTION-BASED REASONING
+====================================================
+
+Before generating an answer, identify exactly what the patient is asking.
+
+Examples:
+
+Question:
+"En hemoglobin normal ah?"
+
+Use only Hemoglobin + its reference range.
+
+Question:
+"Platelet count epdi irukku?"
+
+Use Platelet Count + reference range.
+
+Question:
+"Any abnormal values?"
+
+Review ALL extracted parameters against their corresponding reference ranges.
+
+Question:
+"Simple ah explain pannu"
+
+Give a concise overall explanation of the current report.
+
+Question:
+"Enna problem irukku?"
+
+Explain only what can reasonably be inferred from the documented report.
+Do not invent a diagnosis.
+
+Question:
+"Doctor enna sonna madhiri report irukku?"
+
+Explain the documented findings in simple clinical language, but do not claim to be the patient's actual doctor.
+
+====================================================
+4. DO NOT GIVE GENERIC DISCLAIMER RESPONSES
+====================================================
+
+REMOVE THIS BEHAVIOR:
+
+"Please consult your physician for clinical decisions."
+
+as the default response.
+
+Do NOT use a generic disclaimer when the chatbot has enough reliable report information to answer.
+
+Instead:
+
+1. Analyze the report.
+2. Answer the patient's specific question.
+3. Keep the answer concise.
+4. If appropriate, add a short safety note AFTER answering.
+
+Example:
+
+"உங்கள் platelet count 3,08,000 /cmm. Report-ல் கொடுத்த reference range 1,50,000–4,00,000 /cmm. அதனால் இந்த அளவு அந்த range-க்குள் உள்ளது."
+
+Optional:
+"இது report-ல் உள்ள reference range அடிப்படையிலான விளக்கம்."
+
+Do NOT automatically append:
+"Please consult your physician."
+
+====================================================
+5. WHEN SHOULD "CONSULT A DOCTOR" APPEAR?
+====================================================
+
+Only recommend professional medical evaluation when there is a meaningful reason.
+
+Examples:
+
+A. The report contains a clearly abnormal or potentially concerning result AND the patient's question requires clinical interpretation.
+
+B. The patient describes symptoms that cannot be evaluated from the uploaded report.
+
+C. The report is incomplete or unreadable.
+
+D. OCR/document extraction confidence is too low to safely answer.
+
+E. The patient asks for diagnosis, treatment decisions, medication changes, dosage changes, or urgent medical advice that cannot safely be determined from the report.
+
+Even then:
+
+ANSWER WHATEVER CAN BE ANSWERED FROM THE REPORT FIRST.
+
+Then provide a short appropriate safety recommendation.
+
+Example:
+
+"இந்த report-ல் platelet count 96,000/cmm என்று உள்ளது; report-ன் reference range 1,50,000–4,00,000/cmm என்பதால் இது குறைவாக உள்ளது. இதன் காரணத்தை இந்த report மட்டும் வைத்து உறுதியாக சொல்ல முடியாது. மருத்துவரிடம் follow-up செய்வது நல்லது."
+
+Do NOT respond only:
+
+"Consult your doctor."
+
+====================================================
+6. OCR VALIDATION IS CRITICAL
+====================================================
+
+The current application has an OCR accuracy problem.
+
+For example, the original uploaded CBC report shows:
+
+Neutrophils = 73%
+
+but the extracted UI currently shows:
+
+Neutrophils = 78%
+
+This must be fixed.
+
+NEVER blindly trust an extracted value when there is a visual/source document available.
+
+For every important medical value:
+
+SOURCE IMAGE
+→ OCR/VISION EXTRACTION
+→ STRUCTURED VALUE
+→ VALIDATION
+→ CHATBOT
+
+If the extracted value conflicts with the source image:
+
+- re-run vision/OCR extraction
+- inspect the specific table row
+- compare surrounding labels, value, unit and reference range
+- resolve only when confidence is sufficient
+
+If it cannot be resolved confidently:
+
+Show:
+
+"Neutrophils: Unable to verify"
+
+instead of inventing 73% or 78%.
+
+NEVER silently guess a medical value.
+
+====================================================
+7. MEDICAL TABLE UNDERSTANDING
+====================================================
+
+Treat the report as a structured medical table.
+
+For every row preserve:
+
+TEST NAME
+RESULT
+UNIT
+REFERENCE RANGE
+
+Example:
+
+Neutrophils | 73 | % | 40–75
+
+Do NOT accidentally associate:
+- a value with the wrong test
+- a reference range with the wrong row
+- doctor name as patient name
+- laboratory name as patient name
+- date of collection as report date
+
+====================================================
+8. REPORT-BASED CLINICAL INTERPRETATION
+====================================================
+
+When the patient asks for interpretation:
+
+Use this reasoning sequence:
+
+1. Identify the relevant test.
+2. Identify the actual extracted result.
+3. Identify the reference range printed on THIS report.
+4. Determine whether it is:
+   - within range
+   - above range
+   - below range
+   - not interpretable
+5. Consider related values when relevant.
+6. Check documented remarks/impressions.
+7. Answer only what the evidence supports.
+8. Do not create a diagnosis that is not supported by the report.
+
+IMPORTANT:
+
+Do NOT use generic population ranges when the report itself provides a reference range.
+
+Prefer the reference range printed on the patient's report.
+
+====================================================
+9. DIAGNOSIS SAFETY
+====================================================
+
+Do not convert an abnormal laboratory value directly into a definitive disease diagnosis.
+
+Example:
+
+Bad:
+"Your result means you have anemia."
+
+Better:
+"Your hemoglobin is below the reference range shown on the report. This can be associated with anemia, but the cause cannot be determined from this result alone."
+
+If the report itself explicitly documents a diagnosis or impression, accurately distinguish:
+
+"Report impression:"
+from
+"Possible interpretation:"
+
+Never fabricate a diagnosis.
+
+====================================================
+10. SHORT AND PATIENT-FRIENDLY RESPONSES
+====================================================
+
+The chatbot must NOT produce unnecessarily long medical explanations.
+
+Default answer length:
+2–6 short sentences.
+
+Only provide more detail if the patient asks for:
+- detailed explanation
+- full analysis
+- causes
+- what each value means
+- comparison
+- previous vs current report
+
+Example:
+
+Patient:
+"hemoglobin epdi?"
+
+Answer:
+"உங்கள் Hemoglobin 12.7 g/dL. இந்த report-ல் reference range 12–16 g/dL என்று கொடுக்கப்பட்டுள்ளது. அதனால் இது அந்த range-க்குள் உள்ளது."
+
+Do not provide a complete CBC lecture.
+
+====================================================
+11. LANGUAGE BEHAVIOR
+====================================================
+
+Respect the currently selected language.
+
+If Tamil is selected:
+
+Tamil question → Tamil answer
+Tanglish question → Tamil answer
+Tamil voice → Tamil answer + Tamil TTS
+
+Examples:
+
+"hemoglobin epdi irukku?"
+→ Tamil answer
+
+"simple ah explain pannu"
+→ Tamil answer
+
+"இதுல என்ன abnormal?"
+→ Tamil answer
+
+If English is selected:
+
+English question → English answer.
+
+The text response and voice response MUST use the same language.
+
+====================================================
+12. CURRENT PATIENT / CURRENT REPORT ONLY
+====================================================
+
+The chatbot must use ONLY the currently active patient session.
+
+If:
+
+Patient A report uploaded
+→ analyze Patient A
+
+CLEAR
+
+Patient B report uploaded
+→ forget Patient A's medical context
+
+The chatbot must NEVER mention previous patients after CLEAR.
+
+For multiple reports belonging to the SAME patient:
+
+Report 1
+Report 2
+Report 3
+
+can be jointly analyzed.
+
+The chatbot may compare them when the patient explicitly asks.
+
+====================================================
+13. WHEN REPORT DATA IS INSUFFICIENT
+====================================================
+
+Create three confidence states:
+
+HIGH CONFIDENCE:
+Enough reliable information to answer.
+
+→ Answer normally.
+
+PARTIAL CONFIDENCE:
+Some relevant fields are unclear.
+
+→ Answer only the verified information.
+→ Clearly state which part could not be verified.
+
+LOW CONFIDENCE / UNREADABLE:
+The relevant information cannot be reliably extracted.
+
+→ Do NOT guess.
+→ Tell the patient that the specific part of the report could not be read clearly and ask for a clearer scan/image.
+
+Only in this situation should the chatbot strongly recommend manual clinical review / doctor verification.
+
+====================================================
+14. DO NOT HIDE SUCCESSFUL EXTRACTION
+====================================================
+
+If the left-side report card already shows structured extracted information such as:
+
+Patient
+Age
+Sex
+Date
+Test
+Hemoglobin
+WBC
+Platelets
+etc.
+
+the right-side chatbot MUST receive that structured information as grounding context.
+
+Do not let the chatbot fall back to:
+
+"Based on your report, this information has been reviewed."
+
+The chatbot must actually use the extracted values.
+
+====================================================
+15. QUICK ACTION BUTTONS
+====================================================
+
+Existing buttons:
+
+Explain simply
+Any abnormal values?
+Medications
+Which doctor?
+
+must generate REAL report-grounded answers.
+
+"Explain simply"
+→ summarize current report.
+
+"Any abnormal values?"
+→ compare extracted values with report reference ranges.
+
+"Medications"
+→ list medications only if medications are actually present in the uploaded document.
+
+If no medication is present:
+"No medication information was found in this report."
+
+"Which doctor?"
+→ answer based on the type of report/question, but do not make an unsupported specialist recommendation.
+
+====================================================
+16. VOICE RESPONSE
+====================================================
+
+The chatbot already supports text + voice.
+
+Keep this functionality.
+
+When the patient asks a question:
+→ generate grounded text response
+→ optionally read exactly that response aloud
+
+Voice must NOT generate a different answer from the displayed text.
+
+Implement:
+
+PLAY / LISTEN
+PAUSE
+RESUME
+STOP
+
+If the patient presses STOP:
+→ immediately stop TTS.
+
+If another question is submitted:
+→ cancel previous TTS
+→ generate new answer
+→ speak only the new answer.
+
+====================================================
+17. FINAL RESPONSE DECISION TREE
+====================================================
+
+Implement this exact logic:
+
+USER QUESTION
+      ↓
+Identify language
+      ↓
+Identify patient's intent
+      ↓
+Check active patient/report session
+      ↓
+Retrieve relevant structured report data
+      ↓
+Check OCR confidence
+      ↓
+Validate relevant values
+      ↓
+Can the question be answered safely from the report?
+      ↓
+YES
+→ Analyze report data
+→ Generate concise answer
+→ Use selected/query language
+→ Display text
+→ Optional TTS
+
+NO / INSUFFICIENT DATA
+→ Clearly explain what information is missing/unreadable
+→ Do not guess
+→ Recommend verification/medical review when appropriate
+
+====================================================
+18. ACCEPTANCE TESTS
+====================================================
+
+TEST 1:
+
+Upload the Ranjana Bhelende CBC report.
+
+Ask:
+
+"Explain this report in simple words."
+
+Expected:
+A real summary based on the extracted CBC values.
+
+NOT:
+"Please consult your physician for clinical decisions."
+
+----------------------------------------------------
+
+TEST 2:
+
+Ask:
+
+"hemoglobin epdi irukku?"
+
+Expected:
+
+"உங்கள் Hemoglobin 12.7 g/dL. இந்த report-ல் reference range 12–16 g/dL என்று கொடுக்கப்பட்டுள்ளது. அதனால் இது அந்த range-க்குள் உள்ளது."
+
+----------------------------------------------------
+
+TEST 3:
+
+Ask:
+
+"Any abnormal values?"
+
+Expected:
+The chatbot checks every extracted value against THIS report's reference ranges and identifies only genuine out-of-range values.
+
+----------------------------------------------------
+
+TEST 4:
+
+Verify the source image against OCR.
+
+If source says:
+
+Neutrophils = 73%
+
+the structured result must NOT say:
+
+78%
+
+If the value cannot be verified, mark it uncertain rather than guessing.
+
+----------------------------------------------------
+
+TEST 5:
+
+Clear the current report.
+
+Upload a different patient's report.
+
+Ask about the previous patient.
+
+Expected:
+
+"I don't have that patient's report in the current session."
+
+Do not reveal previous patient data.
+
+----------------------------------------------------
+
+TEST 6:
+
+Upload a report that cannot be read clearly.
+
+Ask:
+
+"what is my hemoglobin?"
+
+Expected:
+
+"I couldn't reliably read the hemoglobin value from this report. Please upload a clearer image or scan."
+
+Do NOT guess.
+
+====================================================
+FINAL REQUIREMENT
+====================================================
+
+Fix the underlying AI grounding and response-generation logic, not just the displayed text.
+
+The left-side extracted medical report data and right-side AI chatbot MUST be connected through the same active patient/report context.
+
+The chatbot should not behave like a generic chatbot giving generic disclaimers.
+
+It should behave as a concise, clinically reasoned, medical-document-grounded assistant:
+
+UPLOAD REPORT
+→ ACCURATE OCR
+→ VALIDATE DATA
+→ STRUCTURE MEDICAL VALUES
+→ UNDERSTAND PATIENT QUESTION
+→ ANALYZE ONLY CURRENT REPORT
+→ ANSWER CLEARLY
+→ SAME LANGUAGE
+→ OPTIONAL VOICE
+→ STOP VOICE WHEN REQUESTED
+
+Do not break the existing UI or other modules.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-20T17:56:09+05:30.
+
+The user's current state is as follows:
+Active Document: a:\MediKiosk_SIH_26047_FINAL\scratch\verify_all_requirements.py (LANGUAGE_PYTHON)
+Cursor is on line: 18
+Other open documents:
+- a:\MediKiosk_SIH_26047_FINAL\app.py (LANGUAGE_PYTHON)
+- a:\MediKiosk_SIH_26047_FINAL\routes\document_routes.py (LANGUAGE_PYTHON)
+- a:\MediKiosk_SIH_26047_FINAL\demo_ui\app.js (LANGUAGE_JAVASCRIPT)
+- a:\MediKiosk_SIH_26047_FINAL\scratch\verify_all_requirements.py (LANGUAGE_PYTHON)
+- a:\MediKiosk_SIH_26047_FINAL\services\ocr\clinical_document_extractor.py (LANGUAGE_PYTHON)
+Running terminal commands:
+- python app.py (in a:\MediKiosk_SIH_26047_FINAL, running for 6h2m51s)
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Gemini 3.6 Flash (High) to Claude Sonnet 4.6 (Thinking). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

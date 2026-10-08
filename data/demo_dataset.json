@@ -1,0 +1,7 @@
+{
+  "purpose": "Synthetic prototype demonstration only",
+  "manual_ml_dataset_required": false,
+  "adaptive_symptoms": ["fever", "chest", "respiratory", "headache", "stomach", "urinary", "skin", "pain"],
+  "sample_document": "data/sample_reports/demo_medical_report.txt",
+  "clinical_safety_note": "Red flags are screening signals, not diagnoses. Doctor/staff review is required."
+}
