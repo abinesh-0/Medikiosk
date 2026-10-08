@@ -113,6 +113,7 @@ For lower-end laptops, lightweight models are generally more practical than larg
 # markdown
 | AI Model | Gemma 4 EB4 |
 | AI Runtime | Ollama / Local Runtime | . 
+It uses OCR to extract text from the medical prescription.
 
 ```
 ```
