@@ -1,0 +1,36 @@
+---
+
+# 📄 License
+
+Copyright (c) 2026 MediKiosk Contributors
+
+This project is licensed under the **MIT License**.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files, to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the software,
+subject to the conditions of the MIT License.
+
+The software is provided **"AS IS"**, without warranty of any kind, express
+or implied. The authors and contributors shall not be liable for any claim,
+damages, or other liability arising from the use of the software.
+
+### Medical Software Disclaimer
+
+MediKiosk is an **AI-assisted patient intake and clinical-support prototype**.
+It is not intended to provide medical diagnosis, treatment, prescription,
+or emergency medical decision-making.
+
+AI-generated questions, summaries, classifications, and other outputs must
+be reviewed and verified by a qualified healthcare professional before being
+used for clinical decision-making.
+
+Patients should not use MediKiosk as a substitute for professional medical
+advice, diagnosis, or treatment.
+
+---
+
+## 👥 Contributors
+
+MediKiosk is developed as a collaborative software project for demonstrating
+AI-assisted, multilingual, and structured patient-intake workflows.
