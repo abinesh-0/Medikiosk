@@ -21,6 +21,93 @@ def _q(key, en, ta, options=None, branch=''):
     }
 
 
+# English equivalents for the Tamil option lists authored in
+# BRANCHES / AYUSH_BRANCHES. English sessions must never see
+# Tamil touch options (session-language requirement).
+OPTION_EN = {
+    '1–2 நாட்கள்': '1–2 days',
+    '3–5 நாட்கள்': '3–5 days',
+    '1 வாரத்துக்கு மேல்': 'More than 1 week',
+    '1 வாரத்துக்குள்': 'Within 1 week',
+    '1–3 வாரங்கள்': '1–3 weeks',
+    '3 வாரங்களுக்கு மேல்': 'More than 3 weeks',
+    'தெரியவில்லை': "Don't know",
+    'தொடர்ந்து': 'Continuous',
+    'வந்து போகிறது': 'Comes and goes',
+    'ஆம்': 'Yes',
+    'இல்லை': 'No',
+    'சில அறிகுறிகள் உள்ளன': 'Some symptoms present',
+    'திடீரென': 'Suddenly',
+    'மெதுவாக': 'Gradually',
+    'அழுத்தம்': 'Pressure',
+    'இறுக்கம்': 'Tightness',
+    'எரிச்சல்': 'Burning',
+    'வலி': 'Pain',
+    'சில நேரங்களில்': 'Sometimes',
+    'சளி இல்லை': 'No phlegm',
+    'வெள்ளை': 'White',
+    'மஞ்சள்/பச்சை': 'Yellow/Green',
+    'ரத்தம் கலந்தது': 'Mixed with blood',
+    'ஓய்வில்': 'At rest',
+    'வேலையில்/நடப்பில்': 'With activity',
+    'இரண்டிலும்': 'Both',
+    'ஒரு பக்கம்': 'One side',
+    'இருபக்கம்': 'Both sides',
+    'நெற்றி': 'Forehead',
+    'பின்பக்கம்': 'Back of head',
+    'கண்களைச் சுற்றி': 'Around the eyes',
+    'மேல் பகுதி': 'Upper part',
+    'கீழ் பகுதி': 'Lower part',
+    'வலது பக்கம்': 'Right side',
+    'இடது பக்கம்': 'Left side',
+    'முழுவதும்': 'All over',
+    'நல்லதாகிறது': 'Getting better',
+    'மோசமாகிறது': 'Getting worse',
+    'அதேபோல்': 'Same',
+    'உணவுக்குப் பிறகு': 'After food',
+    'உணவுக்கு முன்': 'Before food',
+    'மலம் கழித்த பிறகு': 'After bowel movement',
+    'தொடர்பு இல்லை': 'No relation',
+    'பரவுகிறது': 'Spreading',
+    'குறைந்து வருகிறது': 'Reducing',
+    'சில உள்ளது': 'Some present',
+    'தலை': 'Head',
+    'மார்பு': 'Chest',
+    'வயிறு': 'Stomach',
+    'முதுகு': 'Back',
+    'மூட்டு/கால்': 'Joint/Leg',
+    'வேறு இடம்': 'Other place',
+    'அசைவு': 'Movement',
+    'உணவு': 'Food',
+    'ஓய்வு': 'Rest',
+    'வேறு காரணம்': 'Other reason',
+    'சில அளவு': 'Somewhat',
+    'தெரியும்': 'Known',
+    'பொருந்தாது': 'Not applicable',
+    'குறைந்துள்ளது': 'Reduced',
+    'அதிகரித்துள்ளது': 'Increased',
+    'மாறவில்லை': 'No change',
+    'செயல்பாடு': 'Activity',
+    'தூக்கம்': 'Sleep',
+    'பருவநிலை': 'Season',
+    'மாற்றம் உள்ளது': 'Change present',
+    'மாற்றம் இல்லை': 'No change',
+}
+
+
+def localize_options(options, language='English'):
+    """Return touch options in the session language.
+
+    Option lists are authored in Tamil; Tamil sessions keep them as-is,
+    English sessions get the OPTION_EN translation. Unknown strings pass
+    through unchanged so no option is ever dropped. Returns a new list
+    (never mutates the shared branch data).
+    """
+    if not options or language == 'Tamil':
+        return list(options or [])
+    return [OPTION_EN.get(str(o), str(o)) for o in options]
+
+
 BRANCHES = [
 
     ('fever', [
@@ -624,7 +711,7 @@ def get_relevant_candidates(mode, answers, language='English'):
                 'key': key,
                 'question': q['ta'] if language == 'Tamil' else q['en'],
                 'branch': q['branch'] or name,
-                'options': q.get('options', []),
+                'options': localize_options(q.get('options', []), language),
                 'adaptive': True
             })
 

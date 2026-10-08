@@ -113,8 +113,15 @@ def generate(case, history, ayush, answers, documents, flags, assignment, langua
         'ai_source': 'LOCAL_RULES'
     }
 
+    lang_rule = (
+        f'Session language is {language}. Write "summary_text" entirely in {language}.'
+        if language == 'Tamil'
+        else f'Session language is English. Write "summary_text" entirely in English.'
+    )
+
     prompt = """Create a clinician-reviewable MediKiosk intake handoff.
 Do not diagnose, prescribe, or invent facts. Use only the supplied patient answers and extracted document facts.
+""" + lang_rule + """
 
 IMPORTANT ORDER FOR THE SUMMARY:
 1. Chief complaint in the patient's own words.

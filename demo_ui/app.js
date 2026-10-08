@@ -1399,25 +1399,29 @@ async function sendAns(){
             showFlags(r.flags);
         }
 
-        // Next adaptive question
-        if(r.next_question){
+        // Structured decision: continue -> next_question, complete -> final_summary
+        if(r.status === 'continue' || r.next_question){
+            if(r.next_question){
+                A.questions =
+                    A.questions.slice(
+                        0,
+                        A.questionIndex + 1
+                    );
 
-            A.questions =
-                A.questions.slice(
-                    0,
-                    A.questionIndex + 1
-                );
+                A.questions.push(r.next_question);
 
-            A.questions.push(r.next_question);
+                A.questionIndex++;
 
-            A.questionIndex++;
+                question();
 
-            question();
-
-            return;
+                return;
+            }
         }
 
-        // Interview finished
+        // Interview finished (status: complete -> final_summary)
+        if(r.final_summary || r.summary){
+            A.finalSummary = r.final_summary || r.summary;
+        }
         historyStep();
 
     }catch(err){
@@ -1660,6 +1664,7 @@ function renderIntakeSummary(result){
     const sumFooter=isTa?'AI ஆவண வரைவு; மருத்துவர் சரிபார்ப்பு தேவை.':'AI-assisted draft; clinician verification required.';
     shell(t('summary'),`<div class="summary"><div class="summary-head"><span class="badge">${t('route')}</span><h2>${esc(result.department||'General Medicine')}</h2><div class="token">${t('token')}<strong>${esc(result.token)}</strong></div><p>${priorLbl}: <b>${esc(result.priority)}</b></p><p>${docLbl}: <b>${esc(result.doctorName||triageLbl)}</b></p></div><section><h3>${sumTitle}</h3><pre>${esc(result.summary||'')}</pre><small>${sumFooter}</small></section><button class="primary" onclick="printToken('${esc(result.token)}')">🖨 ${t('print')}</button><button type="button" class="secondary" onclick="patient()">${t('dashboard')}</button></div>`);
 }
+async function summaryStep(){const r=await post(`/api/conversation/${A.case.id}/complete`,{});if(!r.success)return alert(r.error||(A.lang==='Tamil'?'மருத்துவ நேர்காணலை முடிக்க இயலவில்லை.':'Unable to complete intake'));A.case=r.case;const q=r.case?.queue_number||r.queue?.queue_number;const token=q?`${(r.department||'GM').replace(/[^A-Z]/gi,'').slice(0,2).toUpperCase()}-${String(q).padStart(3,'0')}`:(r.case.case_number||'READY');const isTa=A.lang==='Tamil';const priorLbl=isTa?'முன்னுரிமை':'Priority';const docLbl=isTa?'நியமிக்கப்பட்ட மருத்துவர்':'Assigned doctor';const triageLbl=isTa?'முன்னுரிமை / காத்திரு':'Triage / queue';const sumTitle=isTa?'AI மருத்துவ சுருக்கம்':'AI Clinical Summary';const sumFooter=isTa?'AI ஆவண வரைவு; மருத்துவர் சரிபார்ப்பு தேவை.':'AI-assisted draft; clinician verification required.';shell(t('summary'),`<div class="summary"><div class="summary-head"><span class="badge">${t('route')}</span><h2>${esc(r.department||'General Medicine')}</h2><div class="token">${t('token')}<strong>${esc(token)}</strong></div><p>${priorLbl}: <b>${esc(r.priority||A.case.priority)}</b></p><p>${docLbl}: <b>${esc(r.assignment?.doctor_name||triageLbl)}</b></p></div><section><h3>${sumTitle}</h3><pre>${esc(r.summary||A.finalSummary||'')}</pre><small>${sumFooter}</small></section><button class="primary" onclick="printToken('${esc(token)}')">🖨 ${t('print')}</button><button class="secondary" onclick="patient()">${t('dashboard')}</button></div>`)}
 function printToken(tok){const w=open('','_blank');w.document.write(`<h1>MediKiosk</h1><h2>Patient Token</h2><h1>${esc(tok)}</h1>`);w.print()}
 function doctor(){return navigateTo('doctor-login',()=>shell(t('doctor'),`<div class="card form"><label>${t('doctorName')}<input id="dn" placeholder="Dr. Name"></label><label>${t('email')}<input id="deemail"></label><label>${t('pass')}<input id="depass" type="password"></label><button class="primary" onclick="doctorLogin()">${t('login')}</button></div>`))}
 async function doctorLogin(){const r=await post('/api/auth/login',{type:'DOCTOR',email:deemail.value,password:depass.value});if(!r.success)return alert(r.error);A.token=r.access_token;A.role='DOCTOR';localStorage.mk_token=A.token;doctorDash(r.user)}

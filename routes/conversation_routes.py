@@ -456,9 +456,31 @@ def message(case_id):
             c.intake_mode, all_answers, c.language or 'English',
         )
 
+    is_complete = ai.get('done') or (next_q is None)
+    status_signal = "complete" if is_complete else "continue"
+    final_summary_text = (ai.get('final_summary') or ai.get('clinical_summary') or None) if is_complete else None
+
+    # Persist summary if interview completed on this turn
+    if is_complete and final_summary_text and not c.ai_summary:
+        try:
+            from models.summary_model import AISummary
+            db.session.add(AISummary(
+                case_id=case_id,
+                summary_text=final_summary_text,
+                summary_json=json.dumps({"summary_text": final_summary_text, "source": ai.get("ai_source")}, ensure_ascii=False),
+                language=c.language,
+                ai_confidence=0.88
+            ))
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+
     return jsonify(
         success=True,
-        next_question=next_q,
+        status=status_signal,
+        next_question=next_q if not is_complete else None,
+        final_summary=final_summary_text,
+        summary=final_summary_text,
         flags=persisted_flags,
         priority=c.priority,
         department=dep,

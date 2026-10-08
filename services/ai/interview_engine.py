@@ -3,7 +3,7 @@ import re
 from typing import Any, Dict, List, Set, Tuple
 
 from services.ai.llm_service import generate_json
-from services.ai.question_engine import BRANCHES, AYUSH_BRANCHES
+from services.ai.question_engine import BRANCHES, AYUSH_BRANCHES, localize_options
 from services.ai.clinical_memory import (
     empty_memory,
     merge_extraction,
@@ -631,7 +631,7 @@ def _candidate_questions(
                     if language == "Tamil"
                     else q["en"]
                 ),
-                "options": q.get("options", []),
+                "options": localize_options(q.get("options", []), language),
                 "branch": q.get("branch") or name,
             })
 
@@ -806,8 +806,8 @@ def _build_prompt(
     facts: Dict[str, Any] = None
 ) -> str:
     chief = answers.get("chief_complaint") or "Not stated"
-    history_items = [f"{k}: {v}" for k, v in answers.items() if v and k != "chief_complaint"]
-    history_str = "; ".join(history_items[-3:]) if history_items else "None yet"
+    history_items = [f"- {k}: {v}" for k, v in answers.items() if v and k != "chief_complaint"]
+    history_str = "\n".join(history_items) if history_items else "None yet"
 
     cand_lines = []
     for c in candidates[:6]:
@@ -815,26 +815,118 @@ def _build_prompt(
         cand_lines.append(f"- {c['key']}: {q_text}")
     cand_str = "\n".join(cand_lines)
 
-    lang_instr = "Support Tamil responses if patient communicates in Tamil." if language == "Tamil" else "Simple English."
+    lang_instr = (
+        "The patient's session language is Tamil. Keep any patient-facing wording in Tamil."
+        if language == "Tamil"
+        else "The patient's session language is English. Use simple, concise English."
+    )
 
-    return f"""You are MediKiosk's clinical intake assistant.
-Select ONE relevant follow-up question key from the candidate list to collect missing clinical history for the doctor.
+    return f"""You are MediKiosk's adaptive clinical intake assistant.
+Analyze the patient's complaint and previous answers.
+Identify the most important missing clinical information (e.g. duration, location, character, severity, associated symptoms).
+
 Rules:
-1. Ask exactly ONE concise question from the candidates.
-2. Do NOT diagnose, prescribe, or provide medical advice.
-3. Do NOT explain or summarize the case.
-4. Do NOT re-ask information that is already known.
-5. If enough clinical information is gathered for doctor review, set "is_complete": true and "key": null.
+1. Analyze the patient's latest input together with all previous answers.
+2. If essential intake info is still missing, select ONE relevant follow-up question key from the candidates and set status to "continue".
+3. If essential intake information has been collected, or if sufficient history exists for clinician review, set status to "complete", is_complete to true, and key to null.
+4. Do NOT provide long medical explanations during questioning. Keep responses fast and concise.
+5. Do NOT diagnose or prescribe medications.
 6. {lang_instr}
 
-Patient complaint: {chief}
-Previous answers: {history_str}
+Patient Complaint: {chief}
+Collected Answers:
+{history_str}
 
-Candidate questions:
+Candidate Questions:
 {cand_str}
 
-Return ONLY valid JSON:
-{{"key": "<selected_candidate_key>", "is_complete": false}}"""
+Return valid JSON ONLY in this exact format:
+{{"status": "continue"|"complete", "missing_info": "<brief description of missing information or null>", "key": "<candidate_key_or_null>", "is_complete": false|true}}"""
+
+
+def generate_concise_clinical_summary(
+    chief_complaint: str,
+    answers: Dict[str, Any],
+    facts: Dict[str, Any] = None,
+    department: str = "General Medicine",
+    language: str = "English",
+) -> str:
+    """Generate a concise, structured clinician-facing summary upon intake completion.
+
+    Rules:
+    - Ground strictly on patient facts.
+    - No diagnosing or prescribing.
+    - Fast and concise bulleted structure.
+    """
+    ans_lines = [
+        f"• {str(k).replace('_', ' ').title()}: {v}"
+        for k, v in (answers or {}).items()
+        if v and k != "chief_complaint"
+    ]
+    ans_str = "\n".join(ans_lines) if ans_lines else "• No additional details provided"
+
+    fallback_summary = (
+        f"CLINICAL INTAKE SUMMARY (Clinician Review)\n"
+        f"• Chief Complaint: {chief_complaint or 'Not stated'}\n"
+        f"• Reported History:\n{ans_str}\n"
+        f"• Preliminary Department: {department}\n"
+        f"• Safety Screening: No active red flags detected\n"
+        f"• Note: AI-assisted patient intake documentation. Clinician verification required before diagnosis or prescription."
+    )
+
+    if language == "Tamil":
+        fallback_summary = (
+            f"மருத்துவர் பார்வைக்கான மருத்துவ சுருக்கம் (AI அறிமுக பதிவு)\n"
+            f"• முக்கிய புகார்: {chief_complaint or 'குறிப்பிடப்படவில்லை'}\n"
+            f"• தொடர்பட்ட வரலாறு:\n{ans_str}\n"
+            f"• முன்கூட்டிய துறை: {department}\n"
+            f"• பாதுகாப்பு திரையிடல்: செயலில் சிவப்பு கொடிகள் இல்லை\n"
+            f"• குறிப்பு: AI-உதவி அறிமுக பதிவு. இறுதி நோயறிதலுக்கு முன் மருத்துவர் சரிபார்ப்பு தேவை."
+        )
+
+    lang_rule = (
+        "5. The session language is Tamil. Write the ENTIRE summary in Tamil."
+        if language == "Tamil"
+        else "5. The session language is English. Write the ENTIRE summary in English."
+    )
+
+    prompt = f"""You are MediKiosk's clinical documentation assistant.
+Generate a concise, structured clinician-facing intake handoff based ONLY on the documented patient facts.
+Rules:
+1. Do NOT diagnose or prescribe medications.
+2. Ground strictly on patient-stated facts.
+3. Keep it concise, structured in bullet points.
+4. Fast and professional.
+{lang_rule}
+
+Patient Complaint: {chief_complaint or 'Not stated'}
+Intake History:
+{ans_str}
+
+Preliminary Department: {department}
+
+Produce a structured summary in this format:
+• Chief Complaint: {chief_complaint or 'Not stated'}
+• Timeline / Duration: <duration or onset reported>
+• Location & Character: <location, character, or severity reported>
+• Associated Symptoms & Pertinent Negatives: <associated symptoms or negatives>
+• Safety Screening: No active red flags detected
+• Recommended Department: {department}
+• Note: AI intake documentation. Clinician verification required."""
+
+    try:
+        from services.ai.llm_service import generate_text
+        text, src = generate_text(prompt, max_tokens=220, temperature=0.1)
+        if text and "[LOCAL_FALLBACK]" not in text and len(text.strip()) > 30:
+            cleaned = text.strip()
+            if cleaned.startswith("```"):
+                cleaned = re.sub(r"^```[a-zA-Z]*\n?", "", cleaned)
+                cleaned = re.sub(r"\n?```$", "", cleaned).strip()
+            return cleaned
+    except Exception:
+        pass
+
+    return fallback_summary
 
 
 # ============================================================
@@ -1240,7 +1332,12 @@ def analyze_turn(
     # Keep candidate pool focused (top 6 highest clinical priority)
     pool = ranked_candidates[:6]
     fallback_key = pool[0]["key"]
-    fallback_payload = {"key": fallback_key, "is_complete": False}
+    fallback_payload = {
+        "status": "continue",
+        "missing_info": "symptom details",
+        "key": fallback_key,
+        "is_complete": False
+    }
 
     prompt = _build_prompt(
         mode=mode,
@@ -1254,7 +1351,7 @@ def analyze_turn(
         raw, source = generate_json(
             prompt,
             json.dumps(fallback_payload, ensure_ascii=False),
-            max_tokens=45
+            max_tokens=100
         )
         data = _parse_json(raw)
     except Exception:
@@ -1267,7 +1364,8 @@ def analyze_turn(
     # --------------------------------------------------------
     # Completion check & Candidate resolution
     # --------------------------------------------------------
-    is_complete = bool(data.get("is_complete")) or (data.get("done") is True)
+    status_signal = str(data.get("status") or "").strip().lower()
+    is_complete = bool(data.get("is_complete")) or (data.get("done") is True) or (status_signal == "complete")
     selected_key = data.get("key")
 
     if isinstance(data.get("next_question"), dict):
@@ -1276,7 +1374,10 @@ def analyze_turn(
             is_complete = True
 
     next_q = None
-    if not is_complete and selected_key not in (None, "null", ""):
+    if is_complete or str(selected_key).lower() in ("none", "null", ""):
+        done = True
+        next_q = None
+    else:
         matched = next((c for c in pool if str(c.get("key") or "").strip() == str(selected_key).strip()), None)
         if not matched:
             matched = next((c for c in candidates if str(c.get("key") or "").strip() == str(selected_key).strip()), None)
@@ -1286,21 +1387,21 @@ def analyze_turn(
             if next_q and clinical_memory and is_covered(clinical_memory, next_q.get("key"), next_q.get("question")):
                 next_q = None
 
-    # Fallback to top priority candidate ONLY if interview is NOT marked complete
-    if next_q is None and not is_complete:
-        for candidate in pool:
-            cand_q = _validate_question(candidate, answers, text)
-            if cand_q is not None and not (clinical_memory and is_covered(clinical_memory, cand_q.get("key"), cand_q.get("question"))):
-                next_q = cand_q
-                break
+        # Fallback to top priority candidate ONLY if interview is NOT marked complete
+        if next_q is None:
+            for candidate in pool:
+                cand_q = _validate_question(candidate, answers, text)
+                if cand_q is not None and not (clinical_memory and is_covered(clinical_memory, cand_q.get("key"), cand_q.get("question"))):
+                    next_q = cand_q
+                    break
 
-    # Determine completion:
-    # 1. next_q is None
-    # 2. Or if session has gathered >= 5 answers with duration known, mark done
-    done = (next_q is None)
-    if not done and answer_count >= 5 and local_facts.get("duration_known"):
-        done = True
-        next_q = None
+        # Determine completion:
+        # 1. next_q is None
+        # 2. Or if session has gathered >= 4 answers with duration known, mark done
+        done = (next_q is None)
+        if not done and answer_count >= 4 and local_facts.get("duration_known"):
+            done = True
+            next_q = None
 
     # --------------------------------------------------------
     # Normalize facts & safety
@@ -1314,17 +1415,30 @@ def analyze_turn(
     missing_information = [c["key"] for c in pool if c["key"] != (next_q.get("key") if next_q else None)]
     safety_flags = normalize_llm_safety_flags(data.get("safety_flags", []))
 
-    # Crucial: NO clinical summary generated during questioning turns (requirement 6)
-    clinical_summary = ""
     department_hint = str(data.get("department_hint") or "General Medicine").strip()
 
+    # Crucial: NO clinical summary generated during questioning turns (requirement 8)
+    # Generate concise clinician-facing summary ONLY when questioning is complete (requirement 7)
+    final_summary = ""
+    if done:
+        chief = answers.get("chief_complaint") or (list(answers.values())[0] if answers else "Not stated")
+        final_summary = generate_concise_clinical_summary(
+            chief_complaint=str(chief),
+            answers=answers,
+            facts=facts,
+            department=department_hint,
+            language=language
+        )
+
     result = {
+        "status": "complete" if done else "continue",
         "facts": facts,
         "covered_information": covered_information,
         "missing_important_information": missing_information,
         "new_symptoms_detected": data.get("new_symptoms_detected", []) if isinstance(data.get("new_symptoms_detected"), list) else [],
         "safety_flags": safety_flags,
-        "clinical_summary": clinical_summary,
+        "clinical_summary": final_summary if done else "",
+        "final_summary": final_summary if done else None,
         "department_hint": department_hint,
         "next_question": next_q,
         "done": done,
@@ -1432,7 +1546,7 @@ def get_questions(
                     if language == "Tamil"
                     else q["en"]
                 ),
-                "options": q.get("options", []),
+                "options": localize_options(q.get("options", []), language),
                 "adaptive": True,
                 "branch": q.get("branch") or name,
             })
