@@ -1,96 +1,337 @@
-# 🏥 MediKiosk
-### AI-Assisted Multilingual Clinical Intake System
+# 🏥 MediKiosk – SIH 26047
 
+### Patient Case-Taking Software | MedTech / HealthTech
 
-MediKiosk is a smart clinical intake kiosk designed to make the patient registration and pre-consultation process faster, simpler, multilingual, and more structured.
+MediKiosk is a patient-facing clinical intake prototype designed to make the initial patient case-taking process more structured, accessible, and efficient.
 
-Instead of making patients repeatedly explain their symptoms at the reception desk, MediKiosk collects their information through an interactive intake workflow, uses a **locally running Gemma 4 E4B model** to understand the patient's responses and ask relevant follow-up questions, and prepares a structured summary for clinical review.
+The system provides a guided question-based workflow where patients can provide information through a simple interface. The project is designed as a **Smart India Hackathon (SIH) prototype** with support for multilingual interaction, voice-related controls, structured data collection, and a local-first AI direction.
 
----
-
-## 🎯 Problem
-
-Traditional hospital registration often requires patients to:
-
-- Explain the same symptoms repeatedly
-- Communicate through language barriers
-- Wait for basic information collection
-- Provide medical documents manually
-- Answer generic questions that may not be relevant to their complaint
-
-This increases waiting time and puts additional workload on hospital staff.
+> ⚠️ **Medical Disclaimer:** MediKiosk is a software prototype for patient intake and clinical-support workflows. It is **not a medical diagnosis system** and must not replace a qualified doctor or healthcare professional.
 
 ---
 
-## 💡 Our Solution
+## ✨ Features
 
-MediKiosk acts as an **AI-assisted first-level clinical intake system**.
+- 🌐 **English + Tamil language support**
+- 🤖 **AI-assisted patient questioning**
+- 🧠 **Local AI support / local-first architecture**
+- 📝 **Structured patient information collection**
+- 🔊 **Question read-aloud / voice control**
+- 🎙️ **Voice/microphone answer control**
+- ⬅️ **Previous-question navigation**
+- ➡️ **Next-question navigation**
+- 🏠 **Home/Exit button from the question page**
+- 📊 **Question progress tracking**
+- 💾 **SQLite support for local demos**
+- 🗄️ **MySQL support**
+- 🔐 **Privacy-oriented local processing direction**
+- 🧪 **Demo-friendly development setup**
+- 💻 **Windows + Python development support**
 
-The system:
+---
 
-1. Collects patient information.
-2. Allows the patient to choose **Tamil or English**.
-3. Accepts symptoms through text and supported voice interaction.
-4. Uses **local Gemma 4 E4B** to analyze the patient's response.
-5. Generates relevant follow-up questions.
-6. Continues the adaptive interview until essential intake information is collected.
-7. Performs safety / red-flag screening.
-8. Creates a structured clinical intake summary.
-9. Supports medical document OCR using local processing.
-10. Provides patient token / queue and doctor-assignment workflow.
+#  Problem Statement
+
+Traditional patient intake can involve:
+
+- Repetitive questioning
+- Manual data entry
+- Inconsistent information collection
+- Language barriers
+- Long waiting times
+- Difficulty organizing patient responses
+- Additional workload for healthcare staff
+
+MediKiosk attempts to improve the initial information-gathering process by providing a guided digital patient-intake workflow.
+
+---
+
+#  Proposed Solution
+
+MediKiosk provides a digital kiosk-style interface where the patient can:
+
+1. Select a language.
+2. Start the patient intake process.
+3. Receive guided questions.
+4. Listen to questions using voice functionality.
+5. Enter or provide answers.
+6. Move between questions.
+7. Return to the previous question when required.
+8. Exit the current question flow using the Home button.
+9. Continue through the complete case-taking process.
+10. Generate/organize structured patient information for the next stage of the workflow.
+
+---
+
+#  AI Direction
+
+MediKiosk is designed with a **local-first AI direction**.
+
+Depending on the enabled modules, AI can assist with:
+
+- Generating relevant follow-up questions
+- Organizing patient responses
+- Summarizing collected information
+- Structuring case information
+- Supporting multilingual interaction
+- Assisting the clinical intake workflow
+
+The goal is to minimize unnecessary dependency on paid cloud AI APIs.
+
+---
+
+#  Local AI / Zero API Cost Direction
+
+A local AI model can run directly on the user's computer instead of sending every request to a paid cloud AI API.
+
+### Advantages
+
+- No per-request API charges
+- Better control over data flow
+- Reduced dependency on internet connectivity
+- Useful for hackathon demonstrations
+- Better privacy potential for sensitive workflows
+- Can continue working locally after the required model is downloaded
 
 ### Important
 
-MediKiosk is an **AI-assisted clinical intake tool**, not an autonomous diagnostic system.
+Local AI performance depends on:
 
-The AI does not replace a doctor and does not make the final medical decision.
+- CPU
+- RAM
+- Storage
+- Model size
+- Quantization
+- Operating system
+- Available GPU/VRAM
+
+For lower-end laptops, lightweight models are generally more practical than large models.
 
 ---
 
-# 🧠 AI Architecture
 
-The core AI is designed to run locally.
+# markdown
+| AI Model | Gemma 4 EB4 |
+| AI Runtime | Ollama / Local Runtime | . 
+
+```
+```
+#  Technology Stack
+
+| Component | Technology |
+|---|---|
+| Backend | Python |
+| Web Framework | Flask |
+| ORM | SQLAlchemy |
+| MySQL Driver | PyMySQL |
+| Local Database | SQLite |
+| Frontend | HTML |
+| Styling | CSS |
+| Client Logic | JavaScript |
+| Development OS | Windows 10/11 |
+| Terminal | Git Bash |
+| Recommended Python | Python 3.13.x |
+
+> **Important:** MediKiosk is currently a Python/Flask project. Do not use `npm` or Node.js commands unless a separate Node-based frontend has been added to the project.
+
+---
+
+# 📁 Project Structure
 
 ```text
-                 ┌─────────────────────┐
-                 │     Patient Input   │
-                 │ Text / Voice / Form │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │  Clinical Intake    │
-                 │    Controller       │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-              ┌──────────────────────────┐
-              │     Local Ollama         │
-              │      Gemma 4 E4B         │
-              │                          │
-              │ Symptom Understanding    │
-              │ Follow-up Questions      │
-              │ Structured Summary       │
-              └────────────┬─────────────┘
-                           │
-                           ▼
-              ┌──────────────────────────┐
-              │ Adaptive Interview       │
-              │                          │
-              │ Question → Answer →      │
-              │ Analyze → Next Question  │
-              └────────────┬─────────────┘
-                           │
-                           ▼
-              ┌──────────────────────────┐
-              │ Clinical Intake Summary  │
-              │                          │
-              │ • Chief complaint        │
-              │ • Duration               │
-              │ • Symptoms               │
-              │ • Relevant information   │
-              │ • Safety indicators      │
-              └────────────┬─────────────┘
-                           │
-                           ▼
-                    👨‍⚕️ Doctor Review
+Medikiosk/
+# 🏥 MediKiosk
+
+### AI-Assisted Multilingual Patient Intake System
+
+MediKiosk is a patient-facing digital clinical intake system designed to make the initial patient information-gathering process faster, more structured, multilingual, and accessible.
+
+Instead of asking every patient the same fixed set of questions, MediKiosk uses an **adaptive clinical interview workflow** to analyze the patient's input and generate relevant follow-up questions.
+
+The system supports **Tamil and English**, voice-assisted interaction, structured patient data collection, safety screening, and clinical summary generation.
+
+> ⚠️ **Medical Disclaimer**
+>
+> MediKiosk is a clinical intake and decision-support prototype. It does not diagnose diseases, prescribe treatment, or replace a qualified healthcare professional.
+
+---
+
+# 🎯 Problem
+
+Traditional patient intake can be:
+
+- Time-consuming for healthcare staff
+- Repetitive
+- Difficult to manage with large patient volumes
+- Challenging for patients with language barriers
+- Inconsistent when collecting important symptoms and history
+- Difficult to convert into structured clinical information
+
+Patients may provide information in their own words, but important details such as duration, severity, associated symptoms, and relevant history may still need to be collected.
+
+---
+
+# 💡 Our Solution
+
+MediKiosk provides an AI-assisted conversational intake workflow.
+
+The patient can:
+
+1. Select **Tamil or English**
+2. Enter or speak their symptoms
+3. Receive an AI-generated relevant follow-up question
+4. Answer using text, predefined options, or voice
+5. Continue through multiple adaptive questions
+6. Receive safety/urgency screening
+7. Complete the intake
+8. Generate a structured clinical summary for healthcare staff
+
+The system focuses on **information collection**, not medical diagnosis.
+
+---
+
+# 🧠 AI-Powered Adaptive Interview
+
+The core feature of MediKiosk is its **adaptive questioning system**.
+
+Instead of following only a fixed questionnaire:
+
+```text
+Patient Input
+      ↓
+Analyze Patient Response
+      ↓
+Identify Missing Clinical Information
+      ↓
+Generate Relevant Follow-up Question
+      ↓
+Patient Answer
+      ↓
+Repeat if More Information Is Needed
+      ↓
+Clinical Summary
+
+Patient:
+"I have fever"
+
+        ↓
+
+MediKiosk:
+"How many days have you had the fever?"
+
+        ↓
+
+Patient:
+"3 days"
+
+        ↓
+
+MediKiosk:
+"Do you have cough, cold, or breathing difficulty?"
+
+        ↓
+
+Patient:
+"No"
+
+        ↓
+
+Continue collecting relevant information
+        ↓
+
+Structured Clinical Summary
+
+**🔄 System Architecture**
+┌──────────────────────────────┐
+│       Patient / Kiosk        │
+│                              │
+│ Tamil / English              │
+│ Text / Voice                 │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│       Flask Web Server       │
+│                              │
+│ Session & Intake Management  │
+│ Question Flow                │
+│ Language Management          │
+│ Safety Workflow              │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│     AI Service Layer         │
+│                              │
+│ Ollama                       │
+│ Gemma 4 E4B                  │
+│                              │
+│ Adaptive Questions           │
+│ Response Analysis            │
+│ Clinical Summary             │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│       Data Layer             │
+│                              │
+│ SQLite / MySQL               │
+│ Patient Intake Data          │
+│ Session Information          │
+│ Structured Responses         │
+└──────────────────────────────┘
+
+**🛠️ Technology Stack**
+| Layer                | Technology                           |
+| -------------------- | ------------------------------------ |
+| Backend              | Python                               |
+| Web Framework        | Flask                                |
+| AI Runtime           | Ollama                               |
+| AI Model             | Gemma 4 E4B                          |
+| ORM                  | SQLAlchemy                           |
+| Database             | SQLite / MySQL                       |
+| MySQL Driver         | PyMySQL                              |
+| Frontend             | HTML                                 |
+| Styling              | CSS                                  |
+| Client Logic         | JavaScript                           |
+| Voice                | Browser-supported voice capabilities |
+| Development Platform | Windows                              |
+| Python               | Python 3.x                           |
+
+
+**📁 Project Structure**
+MediKiosk/
+│
+├── app.py
+├── config.py
+├── requirements.txt
+├── VERIFY_PROJECT.py
+├── JUDGE_PITCH.md
+├── PROJECT_ARCHITECTURE.md
+├── debug_out.txt
+│
+├── models/
+│   └── ...
+│
+├── routes/
+│   └── ...
+│
+├── services/
+│   └── ...
+│
+├── templates/
+│   └── ...
+│
+├── static/
+│   └── ...
+│
+├── demo_ui/
+│   ├── app.js
+│   └── ...
+│
+├── VERIFY_PROJECT.py
+├── JUDGE_PITCH.md
+├── PROJECT_ARCHITECTURE.md
+│
+├── .env
+└── medikiosk.db
