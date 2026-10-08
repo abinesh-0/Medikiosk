@@ -1,37 +1,96 @@
-# MediKiosk – SIH 26047
+# 🏥 MediKiosk
+### AI-Assisted Multilingual Clinical Intake System
 
-**Patient Case-Taking Software | MedTech / HealthTech**
 
-MediKiosk is a patient-facing clinical intake prototype designed to reduce the first-mile history-taking bottleneck in high-volume OPDs.
+MediKiosk is a smart clinical intake kiosk designed to make the patient registration and pre-consultation process faster, simpler, multilingual, and more structured.
 
-## What the prototype demonstrates
+Instead of making patients repeatedly explain their symptoms at the reception desk, MediKiosk collects their information through an interactive intake workflow, uses a **locally running Gemma 4 E4B model** to understand the patient's responses and ask relevant follow-up questions, and prepares a structured summary for clinical review.
 
-1. Language-first patient experience (English/Tamil)
-2. Elder-friendly touch/type/voice interaction
-3. Normal consultation with adaptive symptom questions
-4. AYUSH consultation mode with Ayurveda-oriented history
-5. Potential red-flag detection and staff escalation
-6. Paper medical-record scan/upload workflow
-7. Prototype clinical document extraction from supplied text
-8. Structured physician-ready summary
-9. Department recommendation with General Medicine fallback
-10. Patient token generation
-11. Department-level doctor login with current doctor name + shift
-12. Doctor queue, call/start/complete and review/verification
-13. Staff triage dashboard
-14. Hospital Admin department/staff management and audit log
+---
 
-## Run
+## 🎯 Problem
 
-```powershell
-python app.py
-```
-Then open `http://127.0.0.1:5000`.
+Traditional hospital registration often requires patients to:
 
-## Architecture
+- Explain the same symptoms repeatedly
+- Communicate through language barriers
+- Wait for basic information collection
+- Provide medical documents manually
+- Answer generic questions that may not be relevant to their complaint
 
-Patient → Language → Identity → Normal/AYUSH → Adaptive History → Voice/Touch → Document Scan/Upload → Clinical Extraction → Red Flags → Structured Summary → Department Routing → Token → Doctor Review
+This increases waiting time and puts additional workload on hospital staff.
 
-## Production roadmap
+---
 
-Replace prototype adapters with validated Indian-language ASR, medical OCR, clinical NLP/LLM, FHIR/ABDM/HIS connectors, encrypted storage, RBAC, secure password hashing, TLS, rate limiting, consent management, retention/deletion policies, and clinically validated red-flag rules.
+## 💡 Our Solution
+
+MediKiosk acts as an **AI-assisted first-level clinical intake system**.
+
+The system:
+
+1. Collects patient information.
+2. Allows the patient to choose **Tamil or English**.
+3. Accepts symptoms through text and supported voice interaction.
+4. Uses **local Gemma 4 E4B** to analyze the patient's response.
+5. Generates relevant follow-up questions.
+6. Continues the adaptive interview until essential intake information is collected.
+7. Performs safety / red-flag screening.
+8. Creates a structured clinical intake summary.
+9. Supports medical document OCR using local processing.
+10. Provides patient token / queue and doctor-assignment workflow.
+
+### Important
+
+MediKiosk is an **AI-assisted clinical intake tool**, not an autonomous diagnostic system.
+
+The AI does not replace a doctor and does not make the final medical decision.
+
+---
+
+# 🧠 AI Architecture
+
+The core AI is designed to run locally.
+
+```text
+                 ┌─────────────────────┐
+                 │     Patient Input   │
+                 │ Text / Voice / Form │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │  Clinical Intake    │
+                 │    Controller       │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+              ┌──────────────────────────┐
+              │     Local Ollama         │
+              │      Gemma 4 E4B         │
+              │                          │
+              │ Symptom Understanding    │
+              │ Follow-up Questions      │
+              │ Structured Summary       │
+              └────────────┬─────────────┘
+                           │
+                           ▼
+              ┌──────────────────────────┐
+              │ Adaptive Interview       │
+              │                          │
+              │ Question → Answer →      │
+              │ Analyze → Next Question  │
+              └────────────┬─────────────┘
+                           │
+                           ▼
+              ┌──────────────────────────┐
+              │ Clinical Intake Summary  │
+              │                          │
+              │ • Chief complaint        │
+              │ • Duration               │
+              │ • Symptoms               │
+              │ • Relevant information   │
+              │ • Safety indicators      │
+              └────────────┬─────────────┘
+                           │
+                           ▼
+                    👨‍⚕️ Doctor Review

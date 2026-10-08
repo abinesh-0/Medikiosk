@@ -1,0 +1,423 @@
+2026-10-08 14:45:33,881 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:45:53,255 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:46:10,060 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:46:29,131 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:46:47,767 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4
+======================================================================
+FLOW: English
+======================================================================
+[patient-start] status=200
+{
+ "patient": {
+  "abha_id": null,
+  "address": "",
+  "age": 40,
+  "date_of_birth": null,
+  "email": null,
+  "emergency_contact_name": null,
+  "emergency_contact_phone": null,
+  "full_name": "Repro Patient",
+  "gender": "FEMALE",
+  "id": 1,
+  "phone": "",
+  "preferred_language": "English"
+ },
+ "success": true,
+ "token": {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc5MTQ1MDkxOCwianRpIjoiNTA0MGFjMTAtMzhjMS00MmM3LWI2YmItNzNkYTg2NTUxYzY1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEwIiwibmJmIjoxNzkxNDUwOTE4LCJjc3JmIjoiNzFmNTFiOTEtMjZiMi00MjYxLTkzYzUtZDM2MWY2YmFjZDFhIiwiZXhwIjoxNzkxNDUyNzE4LCJyb2xlIjoiUEFUSUVOVCIsImVtYWlsIjoia2lvc2stMjE5ZDJhNTU1MDRiMTk1NUBtZWRpa2lvc2subG9jYWwifQ.YWPPBJsloa9iaWhARTMuxdIFjDyGuYiCX1qCNkyvJ08",
+  "user": {
+   "email": "kiosk-219d2a55504b1955@medikiosk.local",
+   "full_name": "Repro Patient",
+   "id": 10,
+   "role": "PATIENT"
+  }
+ }
+}
+------------------------------------------------------------
+[kiosk/start] status=200
+{
+ "case": {
+  "case_number": "CASE-08091518765497",
+  "chief_complaint": null,
+  "created_at": "2026-10-08T09:15:18.767955",
+  "id": 1,
+  "intake_mode": "NORMAL",
+  "language": "English",
+  "priority": "NORMAL",
+  "recommended_department": null,
+  "recommended_department_id": null,
+  "status": "IN_PROGRESS",
+  "updated_at": "2026-10-08T09:15:18.767960",
+  "visit_id": 1
+ },
+ "patient": {
+  "abha_id": null,
+  "address": "",
+  "age": 40,
+  "date_of_birth": null,
+  "email": null,
+  "emergency_contact_name": null,
+  "emergency_contact_phone": null,
+  "full_name": "Repro Patient",
+  "gender": "FEMALE",
+  "id": 1,
+  "phone": "",
+  "preferred_language": "English"
+ },
+ "success": true
+}
+------------------------------------------------------------
+[session] status=200
+{
+ "next_question": {
+  "adaptive": false,
+  "key": "chief_complaint",
+  "options": [],
+  "question": "What is your main health problem today?",
+  "reason": "start"
+ },
+ "session": {
+  "case_id": 1,
+  "ended_at": null,
+  "id": 1,
+  "language": "English",
+  "mode": "HYBRID",
+  "started_at": "2026-10-08T09:15:18.791010",
+  "status": "ACTIVE"
+ },
+ "success": true
+}
+------------------------------------------------------------
+Q0 -> key=chief_complaint | What is your main health problem today? | opts=[]
+[message 1] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "General Medicine",
+ "final_summary": null,
+ "flags": [],
+ "known_answers": 1,
+ "next_question": {
+  "adaptive": true,
+  "branch": "fever",
+  "key": "fever_associated",
+  "options": [
+   "Yes",
+   "No",
+   "Some symptoms present"
+  ],
+  "question": "Along with the fever, do you have chills, body pain, cough, vomiting or loose stools?",
+  "reason": "missing_high_value_information"
+ },
+ "priority": "NORMAL",
+ "status": "continue",
+ "success": true,
+ "summary": null
+}
+------------------------------------------------------------
+status=continue ai_source=OLLAMA_GEMMA4 done=False
+Q1 -> key=fever_associated | Along with the fever, do you have chills, body pain, cough, vomiting or loose stools? | opts=['Yes', 'No', 'Some symptoms present']
+[message 2] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "General Medicine",
+ "final_summary": null,
+ "flags": [],
+ "known_answers": 2,
+ "next_question": {
+  "adaptive": true,
+  "branch": "pain",
+  "key": "pain_trigger",
+  "options": [
+   "Movement",
+   "Food",
+   "Rest",
+   "Other reason",
+   "Don't know"
+  ],
+  "question": "What makes the pain worse or better: movement, food, rest, or something else?",
+  "reason": "missing_high_value_information"
+ },
+ "priority": "NORMAL",
+ "status": "continue",
+ "success": true,
+ "summary": null
+}
+------------------------------------------------------------
+status=continue ai_source=OLLAMA_GEMMA4 done=False
+Q2 -> key=pain_trigger | What makes the pain worse or better: movement, food, rest, or something else? | opts=['Movement', 'Food', 'Rest', 'Other reason', "Don't know"]
+[message 3] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "General Medicine",
+ "final_summary": null,
+ "flags": [],
+ "known_answers": 3,
+ "next_question": {
+  "adaptive": true,
+  "branch": "fever",
+  "key": "fever_pattern",
+  "options": [
+   "Continuous",
+   "Comes and goes",
+   "Don't know"
+  ],
+  "question": "Does the fever stay constant or come and go?",
+  "reason": "missing_high_value_information"
+ },
+ "priority": "NORMAL",
+ "status": "continue",
+ "success": true,
+ "summary": null
+}
+------------------------------------------------------------
+status=continue ai_source=OLLAMA_GEMMA4 done=False
+Q3 -> key=fever_pattern | Does the fever stay constant or come and go? | opts=['Continuous', 'Comes and goes', "Don't know"]
+[message 4] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "General Medicine",
+ "final_summary": "ΓÇó Chief Complaint: Moderate fever with chills\nΓÇó Timeline / Duration: 3 days\nΓÇó Location & Character: Upper belly pain, worse after food\nΓÇó Associated Symptoms & Pertinent Negatives: Mild nausea; Denies vomiting, chest pain, or breathing trouble.\nΓÇó Safety Screening: No active red flags detected\nΓÇó Recommended Department: General Medicine\nΓÇó Note: AI intake documentation. Clinician verification required.",
+ "flags": [
+  {
+   "acknowledged_at": null,
+   "acknowledged_by": null,
+   "case_id": 1,
+   "confidence_score": 0.78,
+   "description": "Seek immediate triage assessment.",
+   "detected_by": "RULE_ENGINE",
+   "flag_code": "CHEST_BREATHING",
+   "flag_title": "Potential urgent symptoms detected",
+   "id": 1,
+   "severity": "URGENT",
+   "status": "ACTIVE"
+  }
+ ],
+ "known_answers": 4,
+ "next_question": null,
+ "priority": "URGENT",
+ "status": "complete",
+ "success": true,
+ "summary": "ΓÇó Chief Complaint: Moderate fever with chills\nΓÇó Timeline / Duration: 3 days\nΓÇó Location & Character: Upper belly pain, worse after food\nΓÇó Associated Symptoms & Pertinent Negatives: Mild nausea; Denies vomiting, chest pain, or breathing trouble.\nΓÇó Safety Screening: No active red flags detected\nΓÇó Recommended Department: General Medicine\nΓÇó Note: AI intake documentation. Clinician verification required."
+}
+------------------------------------------------------------
+status=complete ai_source=OLLAMA_GEMMA4 done=True
+DONE. summary head: 'ΓÇó Chief Complaint: Moderate fever with chills\nΓÇó Timeline / Duration: 3 days\nΓÇó Location & Character: Upper belly pain, worse after food\nΓÇó Associated Symptoms & Pertinent Negatives: Mild nausea; Denies '
+======================================================================
+FLOW: Tamil
+======================================================================
+[patient-start] status=200
+{
+ "patient": {
+  "abha_id": null,
+  "address": "",
+  "age": 40,
+  "date_of_birth": null,
+  "email": null,
+  "emergency_contact_name": null,
+  "emergency_contact_phone": null,
+  "full_name": "Repro Patient",
+  "gender": "FEMALE",
+  "id": 2,
+  "phone": "",
+  "preferred_language": "Tamil"
+ },
+ "success": true,
+ "token": {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc5MTQ1MTAwOCwianRpIjoiNTk0YmU5ZmItZGVhOC00ZTlkLTgxNzUtYWIyYmNkNTVmZWYwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjExIiwibmJmIjoxNzkxNDUxMDA4LCJjc3JmIjoiMGY5OWQ4M2YtYTljMi00MzQxLWE2NWQtMGQ2NWUyZmVlM2Q3IiwiZXhwIjoxNzkxNDUyODA4LCJyb2xlIjoiUEFUSUVOVCIsImVtYWlsIjoia2lvc2stZjhkZTU3NjA2ZTA0ZDBhY0BtZWRpa2lvc2subG9jYWwifQ.Vr-vWJY8zYLv8ehieDdcMk5opg4sFbREfRFYbmdap6Q",
+  "user": {
+   "email": "kiosk-f8de57606e04d0ac@medikiosk.local",
+   "full_name": "Repro Patient",
+   "id": 11,
+   "role": "PATIENT"
+  }
+ }
+}
+------------------------------------------------------------
+[kiosk/start] status=200
+{
+ "case": {
+  "case_number": "CASE-08091648149721",
+  "chief_complaint": null,
+  "created_at": "2026-10-08T09:16:48.150196",
+  "id": 2,
+  "intake_mode": "NORMAL",
+  "language": "Tamil",
+  "priority": "NORMAL",
+  "recommended_department": null,
+  "recommended_department_id": null,
+  "status": "IN_PROGRESS",
+  "updated_at": "2026-10-08T09:16:48.150774",
+  "visit_id": 2
+ },
+ "patient": {
+  "abha_id": null,
+  "address": "",
+  "age": 40,
+  "date_of_birth": null,
+  "email": null,
+  "emergency_contact_name": null,
+  "emergency_contact_phone": null,
+  "full_name": "Repro Patient",
+  "gender": "FEMALE",
+  "id": 2,
+  "phone": "",
+  "preferred_language": "Tamil"
+ },
+ "success": true
+2026-10-08 14:47:08,132 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:47:28,622 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:47:51,859 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:48:15,097 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4 (JSON)
+2026-10-08 14:48:48,306 INFO services.ai.llm_service LLM response via OLLAMA_GEMMA4
+}
+------------------------------------------------------------
+[session] status=200
+{
+ "next_question": {
+  "adaptive": false,
+  "key": "chief_complaint",
+  "options": [],
+  "question": "α«çα«⌐α»ìα«▒α»ü α«ëα«Öα»ìα«òα«│α»üα«òα»ìα«òα»ü α««α»üα«òα»ìα«òα«┐α«»α««α«╛α«ò α«Äα«⌐α»ìα«⌐ α«ëα«ƒα«▓α»ìα«¿α«▓α«¬α»ì α«¬α«┐α«░α«Üα»ìα«Üα«⌐α»ê α«ëα«│α»ìα«│α«ñα»ü?",
+  "reason": "start"
+ },
+ "session": {
+  "case_id": 2,
+  "ended_at": null,
+  "id": 2,
+  "language": "Tamil",
+  "mode": "HYBRID",
+  "started_at": "2026-10-08T09:16:48.156460",
+  "status": "ACTIVE"
+ },
+ "success": true
+}
+------------------------------------------------------------
+Q0 -> key=chief_complaint | α«çα«⌐α»ìα«▒α»ü α«ëα«Öα»ìα«òα«│α»üα«òα»ìα«òα»ü α««α»üα«òα»ìα«òα«┐α«»α««α«╛α«ò α«Äα«⌐α»ìα«⌐ α«ëα«ƒα«▓α»ìα«¿α«▓α«¬α»ì α«¬α«┐α«░α«Üα»ìα«Üα«⌐α»ê α«ëα«│α»ìα«│α«ñα»ü? | opts=[]
+[message 1] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "General Medicine",
+ "final_summary": null,
+ "flags": [],
+ "known_answers": 1,
+ "next_question": {
+  "adaptive": true,
+  "branch": "fever",
+  "key": "fever_associated",
+  "options": [
+   "α«åα««α»ì",
+   "α«çα«▓α»ìα«▓α»ê",
+   "α«Üα«┐α«▓ α«àα«▒α«┐α«òα»üα«▒α«┐α«òα«│α»ì α«ëα«│α»ìα«│α«⌐"
+  ],
+  "question": "α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»üα«ƒα«⌐α»ì α«òα»üα«│α«┐α«░α»ìα«Üα»ìα«Üα«▓α»ì, α«ëα«ƒα«▓α»ì α«╡α«▓α«┐, α«çα«░α»üα««α«▓α»ì, α«╡α«╛α«¿α»ìα«ñα«┐ α«àα«▓α»ìα«▓α«ñα»ü α«╡α«»α«┐α«▒α»ìα«▒α»üα«¬α»ìα«¬α»ïα«òα»ìα«òα»ü α«çα«░α»üα«òα»ìα«òα«┐α«▒α«ñα«╛?",
+  "reason": "missing_high_value_information"
+ },
+ "priority": "NORMAL",
+ "status": "continue",
+ "success": true,
+ "summary": null
+}
+------------------------------------------------------------
+status=continue ai_source=OLLAMA_GEMMA4 done=False
+Q1 -> key=fever_associated | α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»üα«ƒα«⌐α»ì α«òα»üα«│α«┐α«░α»ìα«Üα»ìα«Üα«▓α»ì, α«ëα«ƒα«▓α»ì α«╡α«▓α«┐, α«çα«░α»üα««α«▓α»ì, α«╡α«╛α«¿α»ìα«ñα«┐ α«àα«▓α»ìα«▓α«ñα»ü α«╡α«»α«┐α«▒α»ìα«▒α»üα«¬α»ìα«¬α»ïα«òα»ìα«òα»ü α«çα«░α»üα«òα»ìα«òα«┐α«▒α«ñα«╛? | opts=['α«åα««α»ì', 'α«çα«▓α»ìα«▓α»ê', 'α«Üα«┐α«▓ α«àα«▒α«┐α«òα»üα«▒α«┐α«òα«│α»ì α«ëα«│α»ìα«│α«⌐']
+[message 2] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "Gastroenterology",
+ "final_summary": null,
+ "flags": [],
+ "known_answers": 2,
+ "next_question": {
+  "adaptive": true,
+  "branch": "fever",
+  "key": "fever_pattern",
+  "options": [
+   "α«ñα»èα«ƒα«░α»ìα«¿α»ìα«ñα»ü",
+   "α«╡α«¿α»ìα«ñα»ü α«¬α»ïα«òα«┐α«▒α«ñα»ü",
+   "α«ñα»åα«░α«┐α«»α«╡α«┐α«▓α»ìα«▓α»ê"
+  ],
+  "question": "α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»ì α«ñα»èα«ƒα«░α»ìα«¿α»ìα«ñα»ü α«çα«░α»üα«òα»ìα«òα«┐α«▒α«ñα«╛ α«àα«▓α»ìα«▓α«ñα»ü α«╡α«¿α»ìα«ñα»ü α«¬α»ïα«òα«┐α«▒α«ñα«╛?",
+  "reason": "missing_high_value_information"
+ },
+ "priority": "NORMAL",
+ "status": "continue",
+ "success": true,
+ "summary": null
+}
+------------------------------------------------------------
+status=continue ai_source=OLLAMA_GEMMA4 done=False
+Q2 -> key=fever_pattern | α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»ì α«ñα»èα«ƒα«░α»ìα«¿α»ìα«ñα»ü α«çα«░α»üα«òα»ìα«òα«┐α«▒α«ñα«╛ α«àα«▓α»ìα«▓α«ñα»ü α«╡α«¿α»ìα«ñα»ü α«¬α»ïα«òα«┐α«▒α«ñα«╛? | opts=['α«ñα»èα«ƒα«░α»ìα«¿α»ìα«ñα»ü', 'α«╡α«¿α»ìα«ñα»ü α«¬α»ïα«òα«┐α«▒α«ñα»ü', 'α«ñα»åα«░α«┐α«»α«╡α«┐α«▓α»ìα«▓α»ê']
+[message 3] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "General Medicine",
+ "final_summary": null,
+ "flags": [],
+ "known_answers": 3,
+ "next_question": {
+  "adaptive": true,
+  "branch": "pain",
+  "key": "pain_onset",
+  "options": [
+   "α«ñα«┐α«ƒα»Çα«░α»åα«⌐",
+   "α««α»åα«ñα»üα«╡α«╛α«ò",
+   "α«ñα»åα«░α«┐α«»α«╡α«┐α«▓α»ìα«▓α»ê"
+  ],
+  "question": "α«╡α«▓α«┐ α«ñα«┐α«ƒα»Çα«░α»åα«⌐α«╡α«╛ α«àα«▓α»ìα«▓α«ñα»ü α««α»åα«ñα»üα«╡α«╛α«òα«╡α«╛ α«ñα»èα«ƒα«Öα»ìα«òα«┐α«»α«ñα»ü?",
+  "reason": "missing_high_value_information"
+ },
+ "priority": "NORMAL",
+ "status": "continue",
+ "success": true,
+ "summary": null
+}
+------------------------------------------------------------
+status=continue ai_source=OLLAMA_GEMMA4 done=False
+Q3 -> key=pain_onset | α«╡α«▓α«┐ α«ñα«┐α«ƒα»Çα«░α»åα«⌐α«╡α«╛ α«àα«▓α»ìα«▓α«ñα»ü α««α»åα«ñα»üα«╡α«╛α«òα«╡α«╛ α«ñα»èα«ƒα«Öα»ìα«òα«┐α«»α«ñα»ü? | opts=['α«ñα«┐α«ƒα»Çα«░α»åα«⌐', 'α««α»åα«ñα»üα«╡α«╛α«ò', 'α«ñα»åα«░α«┐α«»α«╡α«┐α«▓α»ìα«▓α»ê']
+[message 4] status=200
+{
+ "ai_source": "OLLAMA_GEMMA4",
+ "department": "General Medicine",
+ "final_summary": "**α««α«░α»üα«ñα»ìα«ñα»üα«╡α«░α«┐α«ƒα««α»ì α«Æα«¬α»ìα«¬α«ƒα»êα«¬α»ìα«¬α»ü α«Üα»üα«░α»üα«òα»ìα«òα««α»ì (Handoff Summary)**\n\n*   **α««α»üα«òα»ìα«òα«┐α«» α«¬α»üα«òα«╛α«░α»ì (Chief Complaint):** 3 α«¿α«╛α«ƒα»ìα«òα«│α«╛α«ò α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»ì, α«ëα«ƒα«▓α»ì α«╡α«▓α«┐.\n*   **α«òα«╛α«▓α«╡α«░α«┐α«Üα»ê / α«òα«╛α«▓α««α»ì (Timeline / Duration):** 3 α«¿α«╛α«ƒα»ìα«òα«│α»ì.\n*   **α«çα«ƒα««α»ì α««α«▒α»ìα«▒α»üα««α»ì α«ñα«⌐α»ìα««α»ê (Location & Character):** α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»ì α«ëα«ƒα«⌐α»ì α«╡α«»α«┐α«▒α»ìα«▒α»ü α«╡α«▓α«┐ α«ëα«│α»ìα«│α«ñα»ü; α«ëα«úα«╡α»ü α«ëα«úα»ìα«ƒ α«¬α«┐α«▒α«òα»ü α«╡α«»α«┐α«▒α»ìα«▒α»ü α«╡α«▓α«┐ α««α»ïα«Üα««α«ƒα»êα«òα«┐α«▒α«ñα»ü.\n*   **α«ñα»èα«ƒα«░α»ìα«¬α»üα«ƒα»êα«» α«àα«▒α«┐α«òα»üα«▒α«┐α«òα«│α»ì α««α«▒α»ìα«▒α»üα««α»ì α««α»üα«òα»ìα«òα«┐α«» α«Äα«ñα«┐α«░α»ìα««α«▒α»êα«òα«│α»ì (Associated Symptoms & Pertinent Negatives):** α«╡α«╛α«¿α»ìα«ñα«┐ α«çα«▓α»ìα«▓α»ê, α«▓α»çα«Üα«╛α«⌐ α«òα»üα««α«ƒα»ìα«ƒα«▓α»ì α«ëα«│α»ìα«│α«ñα»ü. α««α«╛α«░α»ìα«¬α»ü α«╡α«▓α«┐ α«çα«▓α»ìα«▓α»ê.\n*   **α«¬α«╛α«ñα»üα«òα«╛α«¬α»ìα«¬α»üα«ñα»ì α«ñα«┐α«░α»êα«»α«┐α«ƒα«▓α»ì (Safety Screening):** α«ñα»Çα«╡α«┐α«░α««α«╛α«⌐ α«åα«¬α«ñα»ìα«ñα»ü α«àα«▒α«┐α«òα»üα«▒α«┐α«òα«│α»ì α«Äα«ñα»üα«╡α»üα««α»ì α«òα«úα»ìα«ƒα«▒α«┐α«»α«¬α»ìα«¬α«ƒα«╡α«┐α«▓α»ìα«▓α»ê.\n*   **α«¬α«░α«┐α«¿α»ìα«ñα»üα«░α»êα«òα»ìα«òα«¬α»ìα«¬α«ƒα»ìα«ƒ α«ñα»üα«▒α»ê (Recommended Department):** α«¬α»èα«ñα»ü α««α«░α»üα«ñα»ìα«ñα»üα«╡α««α»ì (General Medicine).\n*   **α«òα»üα«▒α«┐α«¬α»ìα«¬α»ü (Note):** AI α««α»éα«▓α««α»ì α«ëα«░α»üα«╡α«╛α«òα»ìα«òα«¬α»ìα«¬α«ƒα»ìα«ƒ α««α«░α»üα«ñα»ìα«ñα»üα«╡ α«åα«╡α«úα«¬α»ìα«¬α«ƒα»üα«ñα»ìα«ñα«▓α»ì. α««α«░α»üα«ñα»ìα«ñα»üα«╡ α«¿α«┐α«¬α»üα«úα«░α»ì α«Üα«░α«┐α«¬α«╛α«░α»ìα«¬α»ìα«¬α»ü α«àα«╡α«Üα«┐α«»α««α»ì.",
+ "flags": [
+  {
+   "acknowledged_at": null,
+   "acknowledged_by": null,
+   "case_id": 2,
+   "confidence_score": 0.78,
+   "description": "Seek immediate triage assessment.",
+   "detected_by": "RULE_ENGINE",
+   "flag_code": "CHEST_BREATHING",
+   "flag_title": "Potential urgent symptoms detected",
+   "id": 2,
+   "severity": "URGENT",
+   "status": "ACTIVE"
+  }
+ ],
+ "known_answers": 4,
+ "next_question": null,
+ "priority": "URGENT",
+ "status": "complete",
+ "success": true,
+ "summary": "**α««α«░α»üα«ñα»ìα«ñα»üα«╡α«░α«┐α«ƒα««α»ì α«Æα«¬α»ìα«¬α«ƒα»êα«¬α»ìα«¬α»ü α«Üα»üα«░α»üα«òα»ìα«òα««α»ì (Handoff Summary)**\n\n*   **α««α»üα«òα»ìα«òα«┐α«» α«¬α»üα«òα«╛α«░α»ì (Chief Complaint):** 3 α«¿α«╛α«ƒα»ìα«òα«│α«╛α«ò α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»ì, α«ëα«ƒα«▓α»ì α«╡α«▓α«┐.\n*   **α«òα«╛α«▓α«╡α«░α«┐α«Üα»ê / α«òα«╛α«▓α««α»ì (Timeline / Duration):** 3 α«¿α«╛α«ƒα»ìα«òα«│α»ì.\n*   **α«çα«ƒα««α»ì α««α«▒α»ìα«▒α»üα««α»ì α«ñα«⌐α»ìα««α»ê (Location & Character):** α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»ì α«ëα«ƒα«⌐α»ì α«╡α«»α«┐α«▒α»ìα«▒α»ü α«╡α«▓α«┐ α«ëα«│α»ìα«│α«ñα»ü; α«ëα«úα«╡α»ü α«ëα«úα»ìα«ƒ α«¬α«┐α«▒α«òα»ü α«╡α«»α«┐α«▒α»ìα«▒α»ü α«╡α«▓α«┐ α««α»ïα«Üα««α«ƒα»êα«òα«┐α«▒α«ñα»ü.\n*   **α«ñα»èα«ƒα«░α»ìα«¬α»üα«ƒα»êα«» α«àα«▒α«┐α«òα»üα«▒α«┐α«òα«│α»ì α««α«▒α»ìα«▒α»üα««α»ì α««α»üα«òα»ìα«òα«┐α«» α«Äα«ñα«┐α«░α»ìα««α«▒α»êα«òα«│α»ì (Associated Symptoms & Pertinent Negatives):** α«╡α«╛α«¿α»ìα«ñα«┐ α«çα«▓α»ìα«▓α»ê, α«▓α»çα«Üα«╛α«⌐ α«òα»üα««α«ƒα»ìα«ƒα«▓α»ì α«ëα«│α»ìα«│α«ñα»ü. α««α«╛α«░α»ìα«¬α»ü α«╡α«▓α«┐ α«çα«▓α»ìα«▓α»ê.\n*   **α«¬α«╛α«ñα»üα«òα«╛α«¬α»ìα«¬α»üα«ñα»ì α«ñα«┐α«░α»êα«»α«┐α«ƒα«▓α»ì (Safety Screening):** α«ñα»Çα«╡α«┐α«░α««α«╛α«⌐ α«åα«¬α«ñα»ìα«ñα»ü α«àα«▒α«┐α«òα»üα«▒α«┐α«òα«│α»ì α«Äα«ñα»üα«╡α»üα««α»ì α«òα«úα»ìα«ƒα«▒α«┐α«»α«¬α»ìα«¬α«ƒα«╡α«┐α«▓α»ìα«▓α»ê.\n*   **α«¬α«░α«┐α«¿α»ìα«ñα»üα«░α»êα«òα»ìα«òα«¬α»ìα«¬α«ƒα»ìα«ƒ α«ñα»üα«▒α»ê (Recommended D
+------------------------------------------------------------
+status=complete ai_source=OLLAMA_GEMMA4 done=True
+DONE. summary head: '**α««α«░α»üα«ñα»ìα«ñα»üα«╡α«░α«┐α«ƒα««α»ì α«Æα«¬α»ìα«¬α«ƒα»êα«¬α»ìα«¬α»ü α«Üα»üα«░α»üα«òα»ìα«òα««α»ì (Handoff Summary)**\n\n*   **α««α»üα«òα»ìα«òα«┐α«» α«¬α»üα«òα«╛α«░α»ì (Chief Complaint):** 3 α«¿α«╛α«ƒα»ìα«òα«│α«╛α«ò α«òα«╛α«»α»ìα«Üα»ìα«Üα«▓α»ì, α«ëα«ƒα«▓α»ì α«╡α«▓α«┐.\n*   **α«òα«╛α«▓α«╡α«░α«┐α«Üα»ê / α«òα«╛α«▓α««α»ì (Timeline / Duration):** 3 α«¿α«╛α«ƒα»ìα«òα«│α»ì.\n*   **α«çα«ƒα««'
+
+======================================================================
+VERDICTS
+======================================================================
+[PASS] English: no exception (Bug 1)
+[PASS] English: no HTTP 5xx (Bug 1)
+[PASS] English: interview completed
+[PASS] English: final summary produced
+[PASS] English: options in English (Bug 2) -- n=11
+[PASS] English: summary has no Tamil (Bug 2)
+[PASS] Tamil: no exception (Bug 1)
+[PASS] Tamil: no HTTP 5xx (Bug 1)
+[PASS] Tamil: interview completed
+[PASS] Tamil: final summary produced
+[PASS] Tamil: options in Tamil (Bug 2) -- n=9
+[PASS] Tamil: summary in Tamil (Bug 2)
+
+All verifications PASSED!
