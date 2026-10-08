@@ -1,10 +1,10 @@
-# 🏥 MediKiosk – SIH 26047
+# 🏥 MediKiosk
 
-### Patient Case-Taking Software | MedTech / HealthTech
+
 
 MediKiosk is a patient-facing clinical intake prototype designed to make the initial patient case-taking process more structured, accessible, and efficient.
 
-The system provides a guided question-based workflow where patients can provide information through a simple interface. The project is designed as a **Smart India Hackathon (SIH) prototype** with support for multilingual interaction, voice-related controls, structured data collection, and a local-first AI direction.
+The system provides a guided question-based workflow where patients can provide information through a simple interface. The project is designed as a Hackathon prototype with support for multilingual interaction, voice-related controls, structured data collection, and a local-first AI direction.
 
 > ⚠️ **Medical Disclaimer:** MediKiosk is a software prototype for patient intake and clinical-support workflows. It is **not a medical diagnosis system** and must not replace a qualified doctor or healthcare professional.
 
