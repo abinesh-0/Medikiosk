@@ -21,7 +21,7 @@ const I={
         choose:'Choose language',access:'Choose access',patient:'Patient',doctor:'Doctor',staff:'Staff',admin:'Hospital Admin',
         name:'Patient name',age:'Age',gender:'Gender',phone:'Phone (optional)',address:'Area / address (optional)',pid:'Existing Patient ID (optional)',
         start:'Start',normal:'Normal Consultation',normalD:'General medical consultation',ayush:'AYUSH Consultation',ayushD:'Ayurveda / Siddha / other AYUSH care',
-        voice:'🔊 Hear question',mic:'🎙 Speak answer',next:'Next',back:'Back',history:'Previous medical history?',yes:'Yes',no:'No',
+        voice:'🔊 Hear question',mic:'🎙 Speak answer',next:'Next',back:'Back',home:'Home',history:'Previous medical history?',yes:'Yes',no:'No',
         upload:'Upload / scan report',finish:'Finish history',summary:'Clinical summary',route:'Department',token:'Patient token',print:'Print token',
         startC:'Start consultation',complete:'Complete patient',save:'Save review',dashboard:'Dashboard',logout:'Logout',active:'ACTIVE',
         dept:'Department',email:'Department email',pass:'Department password',doctorName:'Doctor name',shift:'Shift',login:'Secure login',
@@ -37,7 +37,7 @@ const I={
         choose:'மொழியை தேர்வு செய்யுங்கள்',access:'யார் தொடர்கிறீர்கள்?',patient:'நோயாளர்',doctor:'மருத்துவர்',staff:'பணியாளர்',admin:'மருத்துவமனை நிர்வாகம்',
         name:'நோயாளர் பெயர்',age:'வயது',gender:'பாலினம்',phone:'தொலைபேசி (விருப்பம்)',address:'பகுதி / முகவரி',pid:'முந்தைய Patient ID (விருப்பம்)',
         start:'தொடங்குங்கள்',normal:'பொது மருத்துவ ஆலோசனை',normalD:'பொதுவான மருத்துவ பிரச்சனைக்காக',ayush:'AYUSH ஆலோசனை',ayushD:'ஆயுர்வேதம் / சித்தா / பிற AYUSH சேவைக்காக',
-        voice:'🔊 கேள்வியை கேளுங்கள்',mic:'🎙 பதிலை பேசுங்கள்',next:'அடுத்து',back:'பின்',history:'முந்தைய மருத்துவ வரலாறு உள்ளதா?',yes:'ஆம்',no:'இல்லை',
+        voice:'🔊 கேள்வியை கேளுங்கள்',mic:'🎙 பதிலை பேசுங்கள்',next:'அடுத்து',back:'பின்',home:'முகப்பு',history:'முந்தைய மருத்துவ வரலாறு உள்ளதா?',yes:'ஆம்',no:'இல்லை',
         upload:'அறிக்கையை upload செய்யவும்',finish:'முடிக்கவும்',summary:'மருத்துவ சுருக்கம்',route:'துறை',token:'நோயாளர் token',print:'Token print',
         startC:'ஆலோசனை தொடங்கு',complete:'முடிக்கவும்',save:'Review சேமிக்கவும்',dashboard:'Dashboard',logout:'வெளியேறு',active:'ACTIVE',
         dept:'துறை',email:'துறை மின்னஞ்சல்',pass:'துறை கடவுச்சொல்',doctorName:'மருத்துவர் பெயர்',shift:'பணி நேரம்',login:'பாதுகாப்பான உள்நுழைவு',
@@ -70,6 +70,51 @@ let ttsActive = false;
 let ttsPaused = false;
 let currentVoiceText = '';
 let currentVoiceLang = '';
+let questionSpeechTimer = null;
+let navigationHistory = [];
+let currentScreen = {key:'home',render:()=>lang()};
+
+function navigateTo(key,render){
+    if(currentScreen && currentScreen.key!==key){
+        currentScreen.formState=captureFormState();
+        navigationHistory.push(currentScreen);
+    }
+    currentScreen={key,render};
+    render();
+}
+
+function captureFormState(){
+    const state={};
+    app.querySelectorAll('input[id],textarea[id],select[id]').forEach(element=>{
+        if(element.type!=='password'&&element.type!=='file'){
+            state[element.id]=element.value;
+        }
+    });
+    return state;
+}
+
+function restoreFormState(state){
+    if(!state) return;
+    for(const [id,value] of Object.entries(state)){
+        const element=document.getElementById(id);
+        if(element) element.value=value;
+    }
+}
+
+function goBack(){
+    const previous=navigationHistory.pop();
+    if(!previous) return;
+    if(currentScreen?.key==='patient-question'){
+        if(questionSpeechTimer){
+            clearTimeout(questionSpeechTimer);
+            questionSpeechTimer=null;
+        }
+        stopTTS();
+    }
+    currentScreen=previous;
+    previous.render();
+    restoreFormState(previous.formState);
+}
 
 function pauseTTS(){
     if('speechSynthesis' in window && speechSynthesis.speaking && !speechSynthesis.paused){
@@ -252,17 +297,38 @@ function detectMessageLanguage(text){
     return 'English';
 }
 
-function shell(title,body){
+function shell(title,body,options={}){
     app.innerHTML=`<header>
-        <div class="brand" style="cursor:pointer" onclick="lang()"><b>MediKiosk</b><small>SIH 26047 • AI-assisted clinical intake</small></div>
+        <div class="brand" style="cursor:pointer" onclick="goHome()"><b>MediKiosk</b><small>SIH 26047 • AI-assisted clinical intake</small></div>
         <div style="display:flex;align-items:center;gap:10px">
             <span class="status-pill online" onclick="openApiModal()" title="AI Status">🟢 Local Gemma 4 E4B</span>
             <span class="status-pill ready" onclick="openVoiceModal()" title="Voice Settings">🎙 Voice</span>
             <span class="pill">${A.lang}</span>
-            <button class="secondary" style="padding:6px 12px;font-size:12px;margin:0" onclick="lang()">🏠 Home</button>
+            ${navigationHistory.length&&!options.hideBack?`<button type="button" class="secondary" style="padding:6px 12px;font-size:12px;margin:0" onclick="goBack()">← ${t('back')}</button>`:''}
+            <button type="button" class="secondary" style="padding:6px 12px;font-size:12px;margin:0" onclick="goHome()">🏠 Home</button>
         </div>
     </header>
     <main><div class="page-title"><span class="eyebrow">SIH 26047</span><h1>${title}</h1></div>${body}</main>`;
+}
+
+function goHome(){
+    navigationHistory=[];
+    currentScreen={key:'home',render:()=>lang()};
+    if(questionSpeechTimer){
+        clearTimeout(questionSpeechTimer);
+        questionSpeechTimer = null;
+    }
+    stopTTS();
+    A.case = null;
+    A.questions = [];
+    A.questionIndex = 0;
+    A.questionHistory = [];
+    A.currentQuestion = null;
+    A.answers = {};
+    A.selectedRouteKey = '';
+    if(typeof chosen !== 'undefined') chosen = '';
+    if(typeof chosenRoute !== 'undefined') chosenRoute = '';
+    lang();
 }
 
 async function refreshApiStatus(){
@@ -285,7 +351,11 @@ async function refreshApiStatus(){
     } catch(e){}
 }
 
-function lang(){
+function lang(resetNavigation=true){
+    if(resetNavigation){
+        navigationHistory=[];
+        currentScreen={key:'home',render:()=>lang()};
+    }
     app.innerHTML = `
     <div class="hero">
       <div class="hero-card wide">
@@ -324,6 +394,7 @@ function lang(){
 
         <!-- Front Page Tabs -->
         <div class="front-tabs">
+          ${currentScreen?.key.startsWith('home-tab-')&&navigationHistory.length?`<button type="button" class="secondary" onclick="goBack()">← ${t('back')}</button>`:''}
           <button class="front-tab-btn ${(A.frontTab||'intake_bot')==='intake_bot'?'active':''}" onclick="switchFrontTab('intake_bot')">
             🤖 ${A.lang==='Tamil'?'நோயாளி நேர்காணல்':'Intake Chatbot'}
           </button>
@@ -354,9 +425,20 @@ function lang(){
 
 function switchFrontTab(tab){
     if(tab === 'api_connect') tab = 'intake_bot';
+    const previousTab=A.frontTab||'intake_bot';
+    if(tab===previousTab) return lang(false);
+    currentScreen.render=()=>{
+        A.frontTab=previousTab;
+        localStorage.mk_front_tab=previousTab;
+        lang(false);
+    };
     A.frontTab = tab;
     localStorage.mk_front_tab = tab;
-    lang();
+    navigateTo(`home-tab-${tab}`,()=>{
+        A.frontTab=tab;
+        localStorage.mk_front_tab=tab;
+        lang(false);
+    });
 }
 
 function renderFrontTabContent(){
@@ -666,17 +748,13 @@ function startChatbotFlow(){
 function setLang(l){A.lang=l;localStorage.mk_lang=l;patient()}
 function access(){patient()}
 function patient(){
+    A.patientDraft={name:'',age:'',gender:'',phone:'',address:'',pid:''};
+    return navigateTo('patient-intake',()=>renderPatient());
+}
+
+function renderPatient(){
 
     stopPatientVoiceFlow();
-    
-    A.patientDraft={
-        name:'',
-        age:'',
-        gender:'',
-        phone:'',
-        address:'',
-        pid:''
-    };
 
     shell(t('patient'),`
         <div class="card form elderly-form">
@@ -688,11 +766,11 @@ function patient(){
             </div>
 
             <label>${t('name')}
-                <input id="pn" class="large-input" autocomplete="name">
+                <input id="pn" class="large-input" autocomplete="name" value="${esc(A.patientDraft.name||'')}">
             </label>
 
             <label>${t('age')}
-                <input id="pa" class="large-input" type="number" min="0">
+                <input id="pa" class="large-input" type="number" min="0" value="${esc(A.patientDraft.age||'')}">
             </label>
 
             <div id="voice-listening" class="listening">
@@ -1004,7 +1082,10 @@ function patientContinue(){
 }
 
 function patientGender(){
+    return navigateTo('patient-gender',()=>renderPatientGender());
+}
 
+function renderPatientGender(){
     // Gender page வந்தவுடன் intake voice முழுமையாக STOP
     stopPatientVoiceFlow();
 
@@ -1031,25 +1112,29 @@ function patientGender(){
 
             <div class="optional-section">
                 <label>${t('phone')}
-                    <input id="pp" class="large-input" type="tel">
+                    <input id="pp" class="large-input" type="tel" value="${esc(A.patientDraft.phone||'')}">
                 </label>
 
                 <label>${t('address')}
-                    <input id="pad" class="large-input">
+                    <input id="pad" class="large-input" value="${esc(A.patientDraft.address||'')}">
                 </label>
 
                 <label>${t('pid')}
-                    <input id="pid" class="large-input">
+                    <input id="pid" class="large-input" value="${esc(A.patientDraft.pid||'')}">
                 </label>
             </div>
 
-            <button class="secondary large-button" onclick="patient()">
-                ← ${t('back')}
-            </button>
+            ${navigationHistory.length?`<button type="button" class="secondary large-button" onclick="backFromPatientGender()">← ${t('back')}</button>`:''}
         </div>
-    `);
+    `,{hideBack:true});
 }
 
+function backFromPatientGender(){
+    A.patientDraft.phone=document.getElementById('pp')?.value||'';
+    A.patientDraft.address=document.getElementById('pad')?.value||'';
+    A.patientDraft.pid=document.getElementById('pid')?.value||'';
+    goBack();
+}
 
 function selectGender(gender){
     A.patientDraft.gender=gender;
@@ -1104,9 +1189,17 @@ async function startPatient(){
     localStorage.mk_token=A.token;
     consult();
 }
-function consult(){shell(t('access'),`<div class="mode-grid"><button onclick="newCase('NORMAL')">🩺<b>${t('normal')}</b><small>${t('normalD')}</small></button><button onclick="newCase('AYUSH')">🌿<b>${t('ayush')}</b><small>${t('ayushD')}</small></button></div>`)}
+function consult(){return navigateTo('consultation',()=>renderConsult())}
+function renderConsult(){shell(t('access'),`<div class="mode-grid"><button onclick="newCase('NORMAL')">🩺<b>${t('normal')}</b><small>${t('normalD')}</small></button><button onclick="newCase('AYUSH')">🌿<b>${t('ayush')}</b><small>${t('ayushD')}</small></button></div>`)}
 async function newCase(mode){const r=await post('/api/kiosk/start',{mode,language:A.lang});if(!r.success)return alert(r.error);A.case=r.case;A.mode=mode;A.answers={};A.questions=[];A.questionIndex=0;const s=await post(`/api/conversation/${A.case.id}/session`,{});if(!s.success)return alert(s.error);A.session=s.session;A.questions=[s.next_question];question()}
-function question(){
+function question(trackHistory=true){
+    if(trackHistory){
+        return navigateTo('patient-question',()=>question(false));
+    }
+    if(questionSpeechTimer){
+        clearTimeout(questionSpeechTimer);
+        questionSpeechTimer = null;
+    }
     const q=A.questions[A.questionIndex];
     if(!q) return historyStep();
     const saved=A.answers[q.key]?.answer||'';
@@ -1139,7 +1232,8 @@ function question(){
       </div>
 
       <div style="display:flex;gap:12px;margin-top:18px">
-        ${A.questionIndex>0?`<button class="secondary" id="back">← ${t('back')}</button>`:''}
+        <button class="secondary" id="home">🏠 ${t('home')}</button>
+        ${A.questionIndex>0||navigationHistory.length?`<button type="button" class="secondary" id="back">← ${t('back')}</button>`:''}
         <button class="primary" id="next">${t('next')} →</button>
       </div>
     </div>
@@ -1151,18 +1245,29 @@ function question(){
       <p>${A.lang==='Tamil'?'பதில்கள்':'Answers'}: <strong>${Object.keys(A.answers).length}</strong></p>
       <small>${A.lang==='Tamil'?'சிவப்பு கொடிகள் திரையிடல் சமிக்ஞைகள்; மருத்துவர் சரிபார்ப்பு தேவை.':'Red flags are screening signals; clinician verification required.'}</small>
     </div>
-    `);
+    `,{hideBack:true});
 
     document.getElementById('hear')?.addEventListener('click',()=>speak(q.question));
     document.getElementById('mic')?.addEventListener('click',voiceInput);
-    document.getElementById('back')?.addEventListener('click',()=>{A.questionIndex--;question()});
+    document.getElementById('home')?.addEventListener('click',goHome);
+    document.getElementById('back')?.addEventListener('click',()=>{
+        if(A.questionIndex>0){
+            A.questionIndex--;
+            question(false);
+        }else{
+            goBack();
+        }
+    });
     document.querySelectorAll('.answer-option').forEach(b=>b.addEventListener('click',()=>{
         document.getElementById('ans').value=q.options[+b.dataset.i];
         document.querySelectorAll('.answer-option').forEach(x=>x.classList.remove('selected'));
         b.classList.add('selected');
     }));
     document.getElementById('next').addEventListener('click',sendAns);
-    setTimeout(()=>speak(q.question),250);
+    questionSpeechTimer = setTimeout(()=>{
+        questionSpeechTimer = null;
+        speak(q.question);
+    },250);
 }
 
 let intakeMicActive = false;
@@ -1398,14 +1503,22 @@ function openHistoryScanner(){
 }
 
 function historyStep(){
+    return navigateTo('medical-history-choice',()=>renderHistoryStep());
+}
+
+function renderHistoryStep(){
     const count=Object.keys(A.answers).length;
     const capturedMsg=A.lang==='Tamil'?`${count} தகவல்கள் பதிவு செய்யப்பட்டன.`:`${count} adaptive answers captured.`;
     shell(t('history'),`<div class="card center"><h2>${t('history')}</h2><p>${capturedMsg}</p><div class="yesno"><button onclick="documentStep()">${t('yes')}</button><button onclick="summaryStep()">${t('no')}</button></div></div>`);
 }
 
 function documentStep(){
-    const isTa = A.lang === 'Tamil';
     selectedHistoryFile = null;
+    return navigateTo('medical-history-document',()=>renderDocumentStep());
+}
+
+function renderDocumentStep(){
+    const isTa = A.lang === 'Tamil';
     shell(t('upload'), `
     <div class="doc-panel" style="max-width:720px;margin:0 auto">
         <h3 id="history-panel-title" style="margin:0 0 10px 0;font-size:16px;color:#102a2d">
@@ -1446,7 +1559,7 @@ function documentStep(){
             </div>
         </div>
 
-        <div id="history-selected-filename" style="display:none;font-size:12px;color:#0b756b;font-weight:bold;margin-bottom:8px"></div>
+        <div id="history-selected-filename" style="display:${selectedHistoryFile?'block':'none'};font-size:12px;color:#0b756b;font-weight:bold;margin-bottom:8px">${selectedHistoryFile?`✓ Selected: ${esc(selectedHistoryFile.name)}`:''}</div>
 
         <textarea id="history-text-input" rows="3" placeholder="${isTa ? 'அல்லது முந்தைய மருந்துச் சீட்டு / மருத்துவ வரலாறு உரையை இங்கு ஒட்டவும்...' : 'Or paste prescription / medical history text here...'}" style="font-size:12px;width:100%;padding:8px;border:1px solid #c0d8d5;border-radius:6px"></textarea>
 
@@ -1522,19 +1635,68 @@ async function saveDoc(){
         }
     }
 }
-async function summaryStep(){const r=await post(`/api/conversation/${A.case.id}/complete`,{});if(!r.success)return alert(r.error||(A.lang==='Tamil'?'மருத்துவ நேர்காணலை முடிக்க இயலவில்லை.':'Unable to complete intake'));A.case=r.case;const q=r.case?.queue_number||r.queue?.queue_number;const token=q?`${(r.department||'GM').replace(/[^A-Z]/gi,'').slice(0,2).toUpperCase()}-${String(q).padStart(3,'0')}`:(r.case.case_number||'READY');const isTa=A.lang==='Tamil';const priorLbl=isTa?'முன்னுரிமை':'Priority';const docLbl=isTa?'நியமிக்கப்பட்ட மருத்துவர்':'Assigned doctor';const triageLbl=isTa?'முன்னுரிமை / காத்திரு':'Triage / queue';const sumTitle=isTa?'AI மருத்துவ சுருக்கம்':'AI Clinical Summary';const sumFooter=isTa?'AI ஆவண வரைவு; மருத்துவர் சரிபார்ப்பு தேவை.':'AI-assisted draft; clinician verification required.';shell(t('summary'),`<div class="summary"><div class="summary-head"><span class="badge">${t('route')}</span><h2>${esc(r.department||'General Medicine')}</h2><div class="token">${t('token')}<strong>${esc(token)}</strong></div><p>${priorLbl}: <b>${esc(r.priority||A.case.priority)}</b></p><p>${docLbl}: <b>${esc(r.assignment?.doctor_name||triageLbl)}</b></p></div><section><h3>${sumTitle}</h3><pre>${esc(r.summary||'')}</pre><small>${sumFooter}</small></section><button class="primary" onclick="printToken('${esc(token)}')">🖨 ${t('print')}</button><button class="secondary" onclick="patient()">${t('dashboard')}</button></div>`)}
+async function summaryStep(){
+    const r=await post(`/api/conversation/${A.case.id}/complete`,{});
+    if(!r.success)return alert(r.error||(A.lang==='Tamil'?'மருத்துவ நேர்காணலை முடிக்க இயலவில்லை.':'Unable to complete intake'));
+    A.case=r.case;
+    const q=r.case?.queue_number||r.queue?.queue_number;
+    const token=q?`${(r.department||'GM').replace(/[^A-Z]/gi,'').slice(0,2).toUpperCase()}-${String(q).padStart(3,'0')}`:(r.case.case_number||'READY');
+    const result={
+        department:r.department,
+        priority:r.priority||A.case.priority,
+        doctorName:r.assignment?.doctor_name,
+        summary:r.summary,
+        token
+    };
+    navigateTo('intake-summary',()=>renderIntakeSummary(result));
+}
+
+function renderIntakeSummary(result){
+    const isTa=A.lang==='Tamil';
+    const priorLbl=isTa?'முன்னுரிமை':'Priority';
+    const docLbl=isTa?'நியமிக்கப்பட்ட மருத்துவர்':'Assigned doctor';
+    const triageLbl=isTa?'முன்னுரிமை / காத்திரு':'Triage / queue';
+    const sumTitle=isTa?'AI மருத்துவ சுருக்கம்':'AI Clinical Summary';
+    const sumFooter=isTa?'AI ஆவண வரைவு; மருத்துவர் சரிபார்ப்பு தேவை.':'AI-assisted draft; clinician verification required.';
+    shell(t('summary'),`<div class="summary"><div class="summary-head"><span class="badge">${t('route')}</span><h2>${esc(result.department||'General Medicine')}</h2><div class="token">${t('token')}<strong>${esc(result.token)}</strong></div><p>${priorLbl}: <b>${esc(result.priority)}</b></p><p>${docLbl}: <b>${esc(result.doctorName||triageLbl)}</b></p></div><section><h3>${sumTitle}</h3><pre>${esc(result.summary||'')}</pre><small>${sumFooter}</small></section><button class="primary" onclick="printToken('${esc(result.token)}')">🖨 ${t('print')}</button><button type="button" class="secondary" onclick="patient()">${t('dashboard')}</button></div>`);
+}
 function printToken(tok){const w=open('','_blank');w.document.write(`<h1>MediKiosk</h1><h2>Patient Token</h2><h1>${esc(tok)}</h1>`);w.print()}
-function doctor(){shell(t('doctor'),`<div class="card form"><label>${t('doctorName')}<input id="dn" placeholder="Dr. Name"></label><label>${t('email')}<input id="deemail"></label><label>${t('pass')}<input id="depass" type="password"></label><button class="primary" onclick="doctorLogin()">${t('login')}</button></div>`)}
+function doctor(){return navigateTo('doctor-login',()=>shell(t('doctor'),`<div class="card form"><label>${t('doctorName')}<input id="dn" placeholder="Dr. Name"></label><label>${t('email')}<input id="deemail"></label><label>${t('pass')}<input id="depass" type="password"></label><button class="primary" onclick="doctorLogin()">${t('login')}</button></div>`))}
 async function doctorLogin(){const r=await post('/api/auth/login',{type:'DOCTOR',email:deemail.value,password:depass.value});if(!r.success)return alert(r.error);A.token=r.access_token;A.role='DOCTOR';localStorage.mk_token=A.token;doctorDash(r.user)}
-async function doctorDash(user){const r=await get('/api/doctor/cases');if(!r.success)return alert(r.error);const rows=r.cases.map(c=>`<div class="row"><b>${esc(c.case_number)}</b><span>${esc(c.status)} • ${esc(c.priority)} • ${esc(c.recommended_department||'')}</span><button onclick="review(${c.id})">Open</button></div>`).join('')||'<div class="empty">No assigned cases</div>';shell(t('doctor'),`<div class="stats"><div><b>${esc(user.full_name)}</b><span>Doctor</span></div><div><b>${r.cases.length}</b><span>Assigned cases</span></div><div><b>AI + Rules</b><span>Clinical decision support</span></div></div><div class="card"><h3>Today’s patient queue</h3>${rows}</div><button class="secondary" onclick="patient()">${t('logout')}</button>`)}
-async function review(id){const r=await get('/api/doctor/case/'+id);if(!r.success)return alert(r.error);const c=r.case;const hist=(r.history&&Object.entries(r.history).filter(([k,v])=>v).map(([k,v])=>`<p><b>${esc(k)}</b><br>${esc(v)}</p>`).join(''))||'';shell(t('summary'),`<div class="card"><h2>${esc(c.case_number)}</h2><p><b>${esc(c.priority)}</b> • ${esc(c.status)}</p><h3>Patient</h3><p>${esc(r.patient.full_name)} • ${esc(r.patient.age)} • ${esc(r.patient.gender)}</p><h3>Clinical history</h3>${hist}<h3>AI summary</h3><pre>${esc(r.summary?.summary_text||'No summary')}</pre><textarea id="note" rows="5" placeholder="Doctor note"></textarea><button class="primary" onclick="reviewSave(${id},'IN_PROGRESS')">${t('startC')}</button><button class="secondary" onclick="reviewSave(${id},'COMPLETED')">${t('complete')}</button></div>`)}
+async function doctorDash(user){
+    const r=await get('/api/doctor/cases');
+    if(!r.success)return alert(r.error);
+    const rows=r.cases.map(c=>`<div class="row"><b>${esc(c.case_number)}</b><span>${esc(c.status)} • ${esc(c.priority)} • ${esc(c.recommended_department||'')}</span><button type="button" onclick="review(${c.id})">Open</button></div>`).join('')||'<div class="empty">No assigned cases</div>';
+    const render=()=>shell(t('doctor'),`<div class="stats"><div><b>${esc(user.full_name)}</b><span>Doctor</span></div><div><b>${r.cases.length}</b><span>Assigned cases</span></div><div><b>AI + Rules</b><span>Clinical decision support</span></div></div><div class="card"><h3>Today’s patient queue</h3>${rows}</div><button type="button" class="secondary" onclick="patient()">${t('logout')}</button>`);
+    navigateTo('doctor-dashboard',render);
+}
+async function review(id){
+    const r=await get('/api/doctor/case/'+id);
+    if(!r.success)return alert(r.error);
+    const c=r.case;
+    const hist=(r.history&&Object.entries(r.history).filter(([k,v])=>v).map(([k,v])=>`<p><b>${esc(k)}</b><br>${esc(v)}</p>`).join(''))||'';
+    const render=()=>shell(t('summary'),`<div class="card"><h2>${esc(c.case_number)}</h2><p><b>${esc(c.priority)}</b> • ${esc(c.status)}</p><h3>Patient</h3><p>${esc(r.patient.full_name)} • ${esc(r.patient.age)} • ${esc(r.patient.gender)}</p><h3>Clinical history</h3>${hist}<h3>AI summary</h3><pre>${esc(r.summary?.summary_text||'No summary')}</pre><textarea id="note" rows="5" placeholder="Doctor note"></textarea><button type="button" class="primary" onclick="reviewSave(${id},'IN_PROGRESS')">${t('startC')}</button><button type="button" class="secondary" onclick="reviewSave(${id},'COMPLETED')">${t('complete')}</button></div>`);
+    navigateTo(`doctor-case-${id}`,render);
+}
 async function reviewSave(id,status){const r=await fetch('/api/doctor/case/'+id+'/review',{method:'PATCH',headers:{'Content-Type':'application/json',Authorization:'Bearer '+A.token},body:JSON.stringify({status:status==='COMPLETED'?'CONFIRMED':'EDITED',doctor_notes:document.getElementById('note').value,summary_text:document.querySelector('pre')?.textContent||''})}).then(x=>x.json());if(!r.success)return alert(r.error);doctorDash({full_name:'Doctor'})}
-function staff(){shell(t('staff'),`<div class="card form"><label>${t('staffEmail')}<input id="se" value="staff@hospital.local"></label><label>${t('staffPass')}<input id="sp" type="password"></label><button class="primary" onclick="staffLogin()">${t('login')}</button></div>`)}
+function staff(){return navigateTo('staff-login',()=>shell(t('staff'),`<div class="card form"><label>${t('staffEmail')}<input id="se" value="staff@hospital.local"></label><label>${t('staffPass')}<input id="sp" type="password"></label><button class="primary" onclick="staffLogin()">${t('login')}</button></div>`))}
 async function staffLogin(){const r=await post('/api/auth/login',{type:'STAFF',email:se.value,password:sp.value});if(!r.success)return alert(r.error);A.token=r.access_token;A.role='TRIAGE';localStorage.mk_token=A.token;staffDash()}
-async function staffDash(){const r=await get('/api/triage/cases');if(!r.success)return alert(r.error);const alerts=r.cases.filter(c=>['HIGH','URGENT'].includes(c.priority)).map(c=>`<div class="alert"><b>${esc(c.case_number)}</b> • ${esc(c.priority)}<span>${esc(c.status)}</span><br><small>Safety attention required</small></div>`).join('')||'<div class="empty">No active red-flag alerts</div>';shell(t('staff'),`<div class="card"><h3>🚨 Safety alerts</h3>${alerts}</div><div class="card"><h3>Patient queue</h3>${r.cases.map(c=>`<div class="row"><b>${esc(c.case_number)}</b><span>${esc(c.priority)} • ${esc(c.recommended_department||'')}</span><span>${esc(c.status)}</span></div>`).join('')}</div>`)}
-function admin(){shell(t('admin'),`<div class="card form"><label>${t('adminEmail')}<input id="ae" value="admin@hospital.local"></label><label>${t('adminPass')}<input id="ap" type="password"></label><button class="primary" onclick="adminLogin()">${t('login')}</button></div>`)}
+async function staffDash(){
+    const r=await get('/api/triage/cases');
+    if(!r.success)return alert(r.error);
+    const alerts=r.cases.filter(c=>['HIGH','URGENT'].includes(c.priority)).map(c=>`<div class="alert"><b>${esc(c.case_number)}</b> • ${esc(c.priority)}<span>${esc(c.status)}</span><br><small>Safety attention required</small></div>`).join('')||'<div class="empty">No active red-flag alerts</div>';
+    const render=()=>shell(t('staff'),`<div class="card"><h3>🚨 Safety alerts</h3>${alerts}</div><div class="card"><h3>Patient queue</h3>${r.cases.map(c=>`<div class="row"><b>${esc(c.case_number)}</b><span>${esc(c.priority)} • ${esc(c.recommended_department||'')}</span><span>${esc(c.status)}</span></div>`).join('')}</div>`);
+    navigateTo('staff-dashboard',render);
+}
+function admin(){return navigateTo('admin-login',()=>shell(t('admin'),`<div class="card form"><label>${t('adminEmail')}<input id="ae" value="admin@hospital.local"></label><label>${t('adminPass')}<input id="ap" type="password"></label><button class="primary" onclick="adminLogin()">${t('login')}</button></div>`))}
 async function adminLogin(){const r=await post('/api/auth/login',{type:'ADMIN',email:ae.value,password:ap.value});if(!r.success)return alert(r.error);A.token=r.access_token;A.role='ADMIN';localStorage.mk_token=A.token;adminDash()}
-async function adminDash(){const r=await get('/api/admin/state');if(!r.success)return alert(r.error);const deps=r.departments.map(d=>`<div class="row"><b>${esc(d.name)}</b><span>${esc(d.email||'')}</span><span>${d.is_active?'ACTIVE':'INACTIVE'}</span><button onclick="changeDept(${d.id})">Edit login</button></div>`).join('');shell(t('admin'),`<div class="stats"><div><b>${r.stats.departments}</b><span>Departments</span></div><div><b>${r.stats.patients}</b><span>Patients</span></div><div><b>${r.stats.cases}</b><span>Cases</span></div></div><div class="card"><h3>${t('manage')}</h3>${deps}<hr><h3>${t('create')}</h3><div class="grid2"><input id="nd" placeholder="${t('deptName')}"><input id="ne" placeholder="${t('newEmail')}"><input id="np" placeholder="${t('newPass')}" type="password"><input id="ns" placeholder="Doctor name"></div><button class="primary" onclick="createDept()">${t('create')}</button></div><div class="card"><h3>${t('audit')}</h3>${r.audit.map(x=>`<div class="row"><span>${esc(x.created_at||'')}</span><span>${esc(x.user_id||'')}</span><span>${esc(x.action||'')}</span></div>`).join('')}</div>`)}
+async function adminDash(){
+    const r=await get('/api/admin/state');
+    if(!r.success)return alert(r.error);
+    const deps=r.departments.map(d=>`<div class="row"><b>${esc(d.name)}</b><span>${esc(d.email||'')}</span><span>${d.is_active?'ACTIVE':'INACTIVE'}</span><button type="button" onclick="changeDept(${d.id})">Edit login</button></div>`).join('');
+    const render=()=>shell(t('admin'),`<div class="stats"><div><b>${r.stats.departments}</b><span>Departments</span></div><div><b>${r.stats.patients}</b><span>Patients</span></div><div><b>${r.stats.cases}</b><span>Cases</span></div></div><div class="card"><h3>${t('manage')}</h3>${deps}<hr><h3>${t('create')}</h3><div class="grid2"><input id="nd" placeholder="${t('deptName')}"><input id="ne" placeholder="${t('newEmail')}"><input id="np" placeholder="${t('newPass')}" type="password"><input id="ns" placeholder="Doctor name"></div><button type="button" class="primary" onclick="createDept()">${t('create')}</button></div><div class="card"><h3>${t('audit')}</h3>${r.audit.map(x=>`<div class="row"><span>${esc(x.created_at||'')}</span><span>${esc(x.user_id||'')}</span><span>${esc(x.action||'')}</span></div>`).join('')}</div>`);
+    navigateTo('admin-dashboard',render);
+}
 async function createDept(){const r=await post('/api/admin/department',{name:nd.value,email:ne.value,password:np.value,doctor_name:ns.value});if(!r.success)return alert(r.error);adminDash()}
 async function changeDept(id){const email=prompt('New department/doctor email (leave blank to keep current):','');const password=prompt('New password (8+ chars, leave blank to keep current):','');if(!email&&!password)return;const r=await fetch('/api/admin/department/'+id,{method:'PATCH',headers:{'Content-Type':'application/json',Authorization:'Bearer '+A.token},body:JSON.stringify({email,password})}).then(x=>x.json());if(!r.success)return alert(r.error);adminDash()}
 async function post(url,data){
@@ -2179,7 +2341,8 @@ Red Flags / Alert: Return immediately to Emergency if recurrent chest pain > 10 
 Follow-up: Cardiology OPD after 7 days.`
 };
 
-function openDocChat(){
+function openDocChat(trackHistory=true){
+    if(trackHistory) return navigateTo('document-chat',()=>openDocChat(false));
     shell(t('docChat'), `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
@@ -2189,7 +2352,7 @@ function openDocChat(){
             : 'Upload a prescription, lab report or discharge summary. AI extracts clinical facts and answers your questions interactively.'}
         </p>
       </div>
-      <button class="secondary" style="margin:0" onclick="lang()">← ${A.lang==='Tamil'?'முகப்பு பக்கம்':'Back to Home'}</button>
+      <button type="button" class="secondary" style="margin:0" onclick="goHome()">← ${A.lang==='Tamil'?'முகப்பு பக்கம்':'Back to Home'}</button>
     </div>
 
     <div class="doc-chat-wrapper">
@@ -3043,4 +3206,3 @@ function toggleDocChatMic(){
 }
 
 lang();
-
